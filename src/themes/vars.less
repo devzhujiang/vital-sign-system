@@ -1,0 +1,38 @@
+@import "./cover.less";
+p{
+    margin: 0;
+}
+#self_theme{
+    .ant-layout-sider, .ant-menu{
+        background: #fff;
+    }
+    .ant-menu.ant-menu-dark .ant-menu-item-selected, 
+    .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+        background: #F4FFF8;
+        .selectIcon{
+            display: block;
+          }
+        a{
+            color: #00B958;
+        }
+    }
+    .ant-menu{
+        .ant-menu-item{
+            a{
+                color: #6B7C8C;
+            }
+        }
+    }
+    .ant-layout-sider-collapsed{
+        .logo{
+            span{
+              img{
+                  width: 100%;
+              }
+            }
+        }
+    }
+    .ant-layout-sider-collapsed ~ .margin_left200{
+        margin-left: 80px;
+    }
+}

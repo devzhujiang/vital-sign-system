@@ -1,0 +1,95 @@
+.bodyWrap{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
+.body{
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+}
+.content{
+    padding-left: 4%;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    height: 100%;
+    position: relative;
+    left: 0%;
+    overflow-y: auto;
+    align-items: left;
+    justify-content: space-around;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background: url(../assets/loginBg.png);
+    .login_introduction{
+        .chinese{
+            font-size: 36px;
+            color: #fff;
+        }
+        .english{
+            font-size: 36px;
+            color: #fff;
+        }
+    }
+    .login_bottom_copyright{
+        .company{
+            font-size: 24px;
+            color: #fff;
+        }
+    }
+}
+.nav{
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    border-top: 1PX solid #ddd;
+    width: 35%;
+    display: flex;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    flex-direction: column;
+}
+.login_title{
+    font-size: 20px;
+    color: #000;
+}
+.input-style{
+    width: 300px;
+    background: transparent;
+    border: none;
+    // border-bottom: 1px solid #62aaa3;
+}
+.submit-btn{
+    background-color:rgba(0,0,0,0.1);
+    >span{
+      color: #fff;
+    }
+}
+.submit-btn:hover{
+    background-color:rgba(0,0,0,0.5);
+}
+.bodyWrap .ant-form-item-label{
+    text-align: left;
+}
+.bodyWrap{
+    .ant-form-item{
+        border-bottom: 1px solid #ebedf0;
+    }
+    .ant-form-item-label label {
+        color: rgba(0, 0, 0, 0.7);
+    }
+}
+.login_title{
+    margin-bottom: 40px;
+}
