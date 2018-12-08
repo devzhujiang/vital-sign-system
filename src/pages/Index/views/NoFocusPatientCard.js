@@ -7,7 +7,7 @@ export default class NoFocusPatientCard extends Component {
     render() {
         const{
             main:{
-                noFocusPaitents,
+                indexCardInfo,
             },
             focusPaitentServices,
             openPaitentWarningPlan
@@ -15,12 +15,12 @@ export default class NoFocusPatientCard extends Component {
         return (
             <React.Fragment>
                 {
-                    noFocusPaitents.length === 0 ? (
+                    indexCardInfo.length === 0 ? (
                         <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 14, width: '100%' }}>暂无床位和病人信息</div>
                     ) : (
                         <div>
                             {
-                                noFocusPaitents.map((item) =>{
+                                indexCardInfo.map((item) =>{
                                     return(
                                         <React.Fragment key={item.id}>
                                             <Card
@@ -32,6 +32,7 @@ export default class NoFocusPatientCard extends Component {
                                                             <div className="patientBeds">{item.sickbed.sn}</div>
                                                             <div>
                                                                 <span className="patientName">{item.patient.name.replace(/^(.).*(.)$/,"$1***$2")}</span>
+                                                                <span className="patienTAge">{item.patient.gender === 1 ? '男' : item.patient.gender === 2 ? '女' : '未知'}</span>
                                                                 <span className="patienTAge">{item.patient.age}岁</span>
                                                             </div>
                                                         </div>

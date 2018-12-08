@@ -4,6 +4,7 @@ import './index.less'
 import { Button, notification } from 'antd'
 import EnterHospital from './EnterHospital.js'
 import LeaveHospital from './LeaveHospital.js'
+import TableShow from './TableShow.js'
 class AdmissionHospital extends Component {
     componentDidMount(){
         this.props.getWaringPlansList()
@@ -16,6 +17,12 @@ class AdmissionHospital extends Component {
         return (
             <React.Fragment>
                 <div className="admissionHospital">
+                    <div style={{ padding: '20px 0'}}>
+                        <Button onClick={enterHospital.bind(this,{ enterHospital: true})} style={{ marginRight: 10, background: '#128875', border: 'none' }} type="primary">入院登记</Button>
+                        <Button onClick={enterHospital.bind(this,{ leaveHospital: true})} type="primary" style={{ background: '#AE4A4A', border: 'none'}}>出院登记</Button>
+                        <EnterHospital {...this.props} />
+                        <LeaveHospital {...this.props} />
+                    </div>
                     <div className="bedsInfo">
                         <div className="content-item">
                             <p className="roomsCount">10</p>
@@ -34,11 +41,8 @@ class AdmissionHospital extends Component {
                             <p className="roomsName">剩余床位</p>
                         </div>                             
                     </div>
-                    <div className="cont_wrap">
-                        <Button onClick={enterHospital.bind(this,{ enterHospital: true})} style={{ marginRight: 10 }} type="primary">入院登记</Button>
-                        <Button onClick={enterHospital.bind(this,{ leaveHospital: true})}type="primary">出院登记</Button>
-                        <EnterHospital {...this.props} />
-                        <LeaveHospital {...this.props} />
+                    <div>
+                        <TableShow {...this.props} />
                     </div>
                 </div>
             </React.Fragment>

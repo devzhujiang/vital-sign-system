@@ -32,6 +32,7 @@ export default class FocusPatientCard extends Component {
                                                             <div className="patientBeds">{item.sickbed.sn}</div>
                                                             <div>
                                                                 <span className="patientName">{item.patient.name.replace(/^(.).*(.)$/,"$1***$2")}</span>
+                                                                <span className="patienTAge">{item.patient.gender === 1 ? '男' : item.patient.gender === 2 ? '女' : '未知'}</span>
                                                                 <span className="patienTAge">{item.patient.age}岁</span>
                                                             </div>
                                                         </div>
@@ -55,7 +56,7 @@ export default class FocusPatientCard extends Component {
                                                     </div>
                                                 </Link>
                                                 <div className="cardBottom">
-                                                    <Icon onClick={focusPaitentServices.bind(this, item.id)} style={{ marginRight: 6}} className="icon-set-focus"  type="heart" theme="outlined" /> 
+                                                    <Icon onClick={focusPaitentServices.bind(this, item.id)} style={{ marginRight: 6}} className="icon-set-focus"  type="heart" theme="filled" /> 
                                                     <Icon onClick={openPaitentWarningPlan.bind(this, item.id, item.planId)} className="icon-set" type="setting" theme="outlined" /> 
                                                 </div>
                                             </Card>

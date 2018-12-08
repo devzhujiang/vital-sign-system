@@ -24,6 +24,7 @@ class LeaveHospital extends Component {
                         visible={this.props.admissionHospital.leaveHospital}
                         footer={null}
                         onCancel={enterHospital.bind(this, { leaveHospital: false })}
+                        className="modifyModal"
                     >
                         <div>
                             <div>输入需要办理出院的病人信息</div>
@@ -39,7 +40,7 @@ class LeaveHospital extends Component {
                                     )}
                                 </FormItem>
                                 <FormItem>
-                                    <Button htmlType="submit" type="primary">
+                                    <Button style={{ background: '#128875', border: 'none'}} htmlType="submit" type="primary">
                                         搜索
                                     </Button>
                                 </FormItem>
@@ -70,7 +71,7 @@ class LeaveHospital extends Component {
                             {
                                 leave_people_info.length === 0 ? '': 
                                     <div style={{ textAlign: "center", marginTop: 30 }}>
-                                    <Button onClick={sickPeopleLeave.bind(this)} disabled={leave_people_info.length === 0 ? true : false} type="primary">确认出院</Button>
+                                    <Button  style={{ background: '#128875', border: 'none'}} onClick={sickPeopleLeave.bind(this)} disabled={leave_people_info.length === 0 ? true : false} type="primary">确认出院</Button>
                                 </div>
                             }
                         </div>

@@ -42,7 +42,6 @@ function * EnterHospitalServices(argus){
             authorization: sessionStorage.getItem('token')
         }
     })
-    console.log(data)
     if(data && data.code === '0'){
         notification.success({
             message: '病人入院成功！'
@@ -63,7 +62,6 @@ function * EnterHospitalServices(argus){
 }
 
 function * LeaveHospitalServices(argus){
-    console.log(argus)
     const data = yield call(requestServices.create,{
         resource: '/api/vital/t-vital-hospitalized/searchhos',
         data: {
@@ -123,9 +121,48 @@ function * LeaveSickServices(){
     }
 }
 
+function * GetTableInfoServices(argus){
+    yield put({
+        type: 'loading_data_table',
+        payload: true
+    })
+    const { pagination } = yield select((state) => state.admissionHospital)
+    const post_data = {
+        ...pagination,
+        ...argus.payload,
+    }
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-hospitalized/findByPage',
+        json:{
+            ...post_data,
+            departmentId: sessionStorage.getItem('deptId')
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === "0"){
+        yield put({
+            type: 'save_data_table_hospital_info',
+            payload: {
+                data: data.data.page
+            }
+        })
+    }else{
+        notification.warning({
+            message: '系统错误'
+        })
+    }
+    yield put({
+        type: 'loading_data_table',
+        payload: false
+    })
+}
+
 export function* admissionHospital() {
     yield takeEvery('get_waring_plans_list', GetWaringPlansLists)
     yield takeEvery('enter_hospital_services', EnterHospitalServices)
     yield takeEvery('sick_people_leave_hospital', LeaveHospitalServices)
     yield takeEvery('sick_people_leave_services', LeaveSickServices)
+    yield takeEvery('get_table_info_services', GetTableInfoServices)
 }

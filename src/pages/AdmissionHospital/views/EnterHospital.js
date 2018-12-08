@@ -32,6 +32,7 @@ class EnterHospital extends Component {
                         visible={this.props.admissionHospital.enterHospital}
                         footer={null}
                         onCancel={enterHospital.bind(this, { enterHospital: false })}
+                        className="modifyModal"
                     >
                         <div>
                             <Form onSubmit={onSubmitForm.bind(this)} style={{ paddingLeft: '10%'}}>
@@ -111,7 +112,7 @@ class EnterHospital extends Component {
                                     )}
                                 </FormItem>
                                 <FormItem {...formTailLayout}>
-                                    <Button htmlType="submit" type="primary">
+                                    <Button style={{ background: '#128875', border: 'none'}} htmlType="submit" type="primary">
                                         确认入院
                                     </Button>
                                 </FormItem>

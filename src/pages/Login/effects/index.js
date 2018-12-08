@@ -14,6 +14,8 @@ export function* loginServices(argus) {
     })
     if(data && data.code === '0'){
         sessionStorage.setItem('token', data.data.token)
+        sessionStorage.setItem('hospitalName', data.data.institution.institutionName)
+        sessionStorage.setItem('hospitalLogo', data.data.institution.logo)
         yield history.push('/index')
     }else{
         notification.warning({

@@ -6,10 +6,33 @@ const initalState = {
     enterHospital: false,
     leaveHospital: false,
     warningPlans: [],
-    leave_people_info:[]
+    leave_people_info:[],
+    dataTable: [],
+    pagination:{
+        current: 1,
+        pageSize: 10,
+        total: undefined
+    },
+    loading: false,
 }
 export const admissionHospital = (state = initalState, action) => {
     switch (action.type) {
+        case 'save_data_table_hospital_info': 
+            return{
+                ...state,
+                dataTable: action.payload.data.records,
+                pagination: {
+                    ...state.pagination,
+                    current: Number(action.payload.data.current),
+                    total: action.payload.data.total,
+                    pageSize: Number(action.payload.data.size)
+                }
+            }
+        case 'loading_data_table': 
+            return{
+                ...state,
+                loading: action.payload
+            }
         case 'leave_people_info_to_store': 
             return{
                 ...state,

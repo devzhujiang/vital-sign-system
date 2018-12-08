@@ -111,20 +111,20 @@ class Main extends Component {
                         <Layout className="margin_left200">
                             <Header 
                                 id="components-layout-demo-custom-trigger" 
-                                style={{ background: '#fff', padding: 0 }}
+                                style={{ background: '#128875', padding: 0 }}
                             >
                                 <Row>
-                                    <Col span={14}>
+                                    <Col span={12}>
                                         <Icon
                                             className="trigger"
                                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                                             onClick={this.toggle}
                                             style={{ float: 'left', marginTop: 6}}
                                         />
-                                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                                        <span>上海交通大学医学院附属医院</span>
+                                        <Avatar src={sessionStorage.getItem('hospitalLogo')} />
+                                        <span style={{ color: '#fff', marginLeft: 6}}>{sessionStorage.getItem('hospitalName')}</span>
                                     </Col>
-                                    <Col span={6}>
+                                    <Col span={8}>
                                         <Search 
                                             placeholder='请输入病人住院号/床号进行搜索' 
                                             style={{ float: "left", width: '100%', marginTop: 16 }} 
@@ -134,7 +134,7 @@ class Main extends Component {
                                     <Col span={4}>
                                         <Menu
                                             mode='horizontal'
-                                            style={{ float: 'right' }} >
+                                            className="rightMenu" >
                                             <SubMenu title={<span><Icon type='user' /><span>{this.props.main.departmentInfo.departmentName}</span></span>} >
                                                 <Item>
                                                     <div onClick={() => {

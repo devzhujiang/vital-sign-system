@@ -3,7 +3,7 @@ import 'es6-promise/auto'
 import qs from 'qs'
 import { notification } from 'antd'
 import createHistory from 'history/createHashHistory'
-const history = createHistory()
+// const history = createHistory()
 
 function parse(response) {
     return response.json()
@@ -28,16 +28,16 @@ function errHandle(response) {
                 message: '登录超时，请重新登录',
                 description: `服务器返回错误401`
             })
-            history.push('/login')
-            window.location.reload()
+            // history.push('/login')
+            // window.location.reload()
             break;
         case 500:
             notification.error({
                 message: '网络异常',
                 description: `服务器返回错误 500`
             })
-            history.push('/login')
-            window.location.reload()
+            // history.push('/login')
+            // window.location.reload()
             break;
         default:
             response.json ? response.json().then(({ message }) => {
@@ -51,8 +51,8 @@ function errHandle(response) {
                     description: response.toString()
                 })
             )
-            history.push('/login')
-            window.location.reload()
+            // history.push('/login')
+            // window.location.reload()
             break;
     }
 }
