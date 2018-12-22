@@ -14,9 +14,19 @@ const initalState = {
         total: undefined
     },
     loading: false,
+    sorter:{
+        columnKey: 'hospitalStay',
+        field: 'hospitalStay',
+        order: 'descend'
+    },
 }
 export const admissionHospital = (state = initalState, action) => {
     switch (action.type) {
+        case 'modify_sort_table': 
+            return{
+                ...state,
+                sorter: action.payload
+            }
         case 'save_data_table_hospital_info': 
             return{
                 ...state,

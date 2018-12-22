@@ -6,8 +6,13 @@ import TopView from './TopView'
 import BasicLineCharts from "./BasicLineCharts"
 import StepLineCharts from './StepLineCharts'
 import ScatterSimpleCharts from './ScatterSimpleCharts'
+import qs from 'qs'
 const TabPane = Tabs.TabPane
 class VisualCharts extends Component {
+    componentDidMount(){
+        let query = qs.parse(this.props.location.search,{ ignoreQueryPrefix: true })
+        this.props.getBreathData(query)
+    }
     render() {
         const {
             onTabshange
@@ -64,7 +69,27 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onTabshange(key) {
             console.log(key)
-        }
+        },
+        getBreathData(query){
+            dispatch({
+                type: 'breath_data_services',
+                payload:{
+                    query
+                }
+            })
+            dispatch({
+                type: 'heart_data_services',
+                payload:{
+                    query
+                }
+            })
+            dispatch({
+                type: 'leave_bed_data_services',
+                payload:{
+                    query
+                }
+            })
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(VisualCharts)

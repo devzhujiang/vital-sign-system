@@ -222,6 +222,145 @@ function * AddDevicesToBeds(argus){
         })
     }
 }
+//获取指定科室下面的所有病房，用于病人换床
+function * GetAllBedsToExchangeServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-sickroom/findAllRoomByDeptId',
+        params: {
+            deptId: sessionStorage.getItem('deptId')
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+
+//获取房间里面已经有人入住的床位
+function * GetHasUserBedsServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-sickbed/findBedsHasUserByRoomId',
+        params: {
+            roomId: 2
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+//获取该房间内空闲的已经安装了设备且没有人入住的床位
+function * GetEmptyBedsServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-sickbed/beds',
+        params: {
+            roomId: 2
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+//病人换床
+function * PatientExchangeServices(argus){
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-sickbed/userChangeBed',
+        data: {
+            sourceId: 8,
+            targetId: 14,
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+        console.log('病人换床成功')
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+//获取该房间内已经安装了设备的床位
+function * GetAllDeviceBedServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-sickbed/allDeviceBedsByRoomId',
+        params: {
+            roomId: 8
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+
+//获取房间里面没有人入住的床位
+function * GetAllBedsNoUserServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-sickbed/findBedsNoUserByRoomId',
+        params: {
+            roomId: 3
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
+//设备换床
+function * DeviceExchangeBedServices(argus){
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-sickbed/userChangeBed',
+        data: {
+            sourceId: 6,
+            targetId: 3,
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+        console.log('设备换床成功')
+    }else{
+        notification.warning({
+            message: '系统异常'
+        })
+    }
+}
 export function* bedSet() {
     yield takeEvery('get_department_beds_services', GetDepartmentBedsServices)
     yield takeEvery('add_department_rooms_services', AddDepartmentRoomsServices)
@@ -230,4 +369,11 @@ export function* bedSet() {
     yield takeEvery('exchange_sick_bed', ExchangeDepartmentBedssServices)
     yield takeEvery('add_devices_to_beds', AddDevicesToBeds)
     yield takeEvery('get_depart_sick_room_for_select', GetDepartmentSickRoomServices)
+    yield takeEvery('get_all_beds_for_exchange', GetAllBedsToExchangeServices)
+    yield takeEvery('get_has_user_beds_services', GetHasUserBedsServices)
+    yield takeEvery('get_empty_beds_services', GetEmptyBedsServices)
+    yield takeEvery('patient_exchange_beds_services', PatientExchangeServices)
+    yield takeEvery('get_all_device_bed_services', GetAllDeviceBedServices)
+    yield takeEvery('get_all_beds_no_user_services', GetAllBedsNoUserServices)
+    yield takeEvery('device_exchange_bed_services', DeviceExchangeBedServices)
 }

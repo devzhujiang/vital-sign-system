@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import 'es6-promise/auto'
 import qs from 'qs'
 import { notification } from 'antd'
-import createHistory from 'history/createHashHistory'
+// import createHistory from 'history/createHashHistory'
 // const history = createHistory()
 
 function parse(response) {

@@ -11,7 +11,8 @@ class BedSet extends Component {
         this.props.getDepartmentBeds()
         // this.props.addDepartmentRooms()
         // this.props.addDepartmentBeds()
-        this.props.getDepartmentInfo()
+        // this.props.getDepartmentInfo()
+        // this.props.getBedsForExchange()
     }
     render() {
         return (
@@ -211,6 +212,33 @@ const mapDispatchToProps = (dispatch, props) => {
             })
             dispatch({
                 type: 'get_depart_sick_room_for_select'
+            })
+        },
+        //获取指定科室下面的所有病房，用于病人换床
+        getBedsForExchange() {
+            dispatch({
+                type: 'get_all_beds_for_exchange'
+            })
+            // dispatch({
+            //     type: 'get_has_user_beds_services'
+            // })
+            // dispatch({
+            //     type: 'get_empty_beds_services'
+            // })
+            // //病人换床
+            // dispatch({
+            //     type: 'patient_exchange_beds_services'
+            // })
+            
+            dispatch({
+                type: 'get_all_beds_no_user_services'
+            })
+            dispatch({
+                type: 'get_all_device_bed_services'
+            })
+            //设备换床
+            dispatch({
+                type: 'device_exchange_bed_services'
             })
         },
     }
