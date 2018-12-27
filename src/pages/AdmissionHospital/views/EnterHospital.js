@@ -67,12 +67,7 @@ class EnterHospital extends Component {
                                     )}
                                 </FormItem>
                                 <FormItem {...formItemLayout} label="手机号">
-                                    {getFieldDecorator('phone', {
-                                        rules: [{
-                                            required: true,
-                                            message: '请选择病人手机号',
-                                        }],
-                                    })(
+                                    {getFieldDecorator('phone')(
                                         <Input placeholder="请选择病人手机号" />
                                     )}
                                 </FormItem>
@@ -109,6 +104,11 @@ class EnterHospital extends Component {
                                                 ))
                                             }
                                         </Select>
+                                    )}
+                                </FormItem>
+                                <FormItem {...formItemLayout} label="病人特征">
+                                    {getFieldDecorator('feature')(
+                                        <Input placeholder="请输入病人特征" />
                                     )}
                                 </FormItem>
                                 <FormItem {...formTailLayout}>

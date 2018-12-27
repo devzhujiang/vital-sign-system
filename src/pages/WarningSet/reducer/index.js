@@ -4,12 +4,69 @@ const initalState = {
     },
     plans:[],
     options:{
-        formListShow: false
+        formListShow: false,
+        addModal: false,
+        modifyModal: false,
+        isShowModifyForm: false
     },
     message: '',
+    warningDetails: {},
+    spinning: true
 }
 export const warningSet = (state = initalState, action) => {
     switch (action.type) {
+        case 'hide_modify_form': 
+            return{
+                ...state,
+                options: {
+                    ...state.options,
+                    isShowModifyForm: false
+                }
+            }
+        case 'show_modify_form': 
+            return{
+                ...state,
+                options: {
+                    ...state.options,
+                    isShowModifyForm: true
+                }
+            }
+        case 'clean_loading_warning_true': 
+            return{
+                ...state,
+                spinning: true
+            }
+        case 'clean_loading_warning': 
+            return{
+                ...state,
+                spinning: false
+            }
+        case 'save_warning_details_by_id_services': 
+            return{
+                ...state,
+                warningDetails: action.payload.data
+            }
+        case 'clean_warning_details_by_id_services': 
+            return{
+                ...state,
+                warningDetails: {}
+            }
+        case 'open_modify_warning_modal': 
+            return{
+                ...state,
+                options: {
+                    ...state.options,
+                    modifyModal: action.payload.flag
+                }
+            }
+        case 'open_add_warning_modal': 
+            return{
+                ...state,
+                options: {
+                    ...state.options,
+                    addModal: action.payload.flag
+                }
+            }
         case 'save_warning_info': 
             return{
                 ...state,

@@ -9,6 +9,13 @@ class TableShow extends Component {
         this.props.getTableShowInfoInit()
     }
     columnsMaker = () => {
+        const {
+            props:{
+                admissionHospital:{
+                    sorter
+                }
+            }
+        } = this
         return [{
                 title: '床号',
                 dataIndex: 'sickbed.sn'
@@ -25,7 +32,7 @@ class TableShow extends Component {
                 title: '入院时间',
                 dataIndex: 'hospitalStay',
                 sorter: true,
-                // sortOrder: sorter.columnKey === 'hospitalStay' && sorter.order,
+                sortOrder: sorter.columnKey === 'hospitalStay' && sorter.order,
                 render(text, record, index) {
                     return (
                         <span>{record.hospitalStay ? record.hospitalStay : '--'}</span>
@@ -91,12 +98,14 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         getTableShowInfoInit() {
             dispatch({
-                type: 'get_table_info_services'
+                type: 'get_table_info_services',
+                payload:{
+                    sortCloumn: 'hospitalStay',
+                    sortType: 'desc'
+                }
             })
         },
         onTableChange({ current, pageSize }, filters, sorter) {
-            console.log(filters)
-            console.log(sorter)
             if (!_.isEmpty(sorter)) {
                 const sortInfo = {
                     columnKey: sorter.columnKey,
@@ -107,14 +116,26 @@ const mapDispatchToProps = (dispatch, props) => {
                     type: 'modify_sort_table',
                     payload: sortInfo
                 })
+                dispatch({
+                    type: 'get_table_info_services',
+                    payload: {
+                        current,
+                        pageSize,
+                        sortCloumn: sorter.columnKey,
+                        sortType: sorter.order === 'ascend' ? 'asc' : 'desc'
+                    }
+                })
+            }else{
+                dispatch({
+                    type: 'get_table_info_services',
+                    payload: {
+                        current,
+                        pageSize,
+                        sortCloumn: 'hospitalStay',
+                        sortType: 'desc'
+                    }
+                })
             }
-            dispatch({
-                type: 'get_table_info_services',
-                payload: {
-                    current,
-                    pageSize
-                }
-            })
         }
     }
 }

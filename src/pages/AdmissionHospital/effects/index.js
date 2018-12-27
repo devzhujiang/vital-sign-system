@@ -135,7 +135,7 @@ function * GetTableInfoServices(argus){
         resource: '/api/vital/t-vital-hospitalized/findByPage',
         json:{
             ...post_data,
-            departmentId: sessionStorage.getItem('deptId')
+            departmentId: sessionStorage.getItem('deptId'),
         },
         headers:{
             authorization: sessionStorage.getItem('token')

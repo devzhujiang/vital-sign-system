@@ -49,7 +49,35 @@ function * AddWaringPlanServices(argus){
         })
     }
 }
+function * GetWarningDetailsByIdServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-warning-plan/findPlanById',
+        params:{
+            id: argus.payload.itemId
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    console.log(data)
+    if(data && data.code === '0'){
+        yield put({
+            type: 'save_warning_details_by_id_services',
+            payload: {
+                data: data.data
+            }
+        })
+        yield put({
+            type: 'clean_loading_warning'
+        })
+    }else{
+        notification.error({
+            message: '系统错误'
+        })
+    }
+}
 export function* warningSet() {
     yield takeEvery('get_warning_info_services', GetWarningInfoServices)
     yield takeEvery('add_waring_plan_services', AddWaringPlanServices)
+    yield takeEvery('get_warning_details_by_id_services', GetWarningDetailsByIdServices)
 }

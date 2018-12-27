@@ -2,9 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Row, Form, Input, Button, Checkbox, Radio } from 'antd'
 import './index.less'
-const FormItem = Form.Item
+import __ from 'lodash'
+import qs from 'qs'
 const RadioGroup = Radio.Group
-class FormSearch extends Component {
+const FormItem = Form.Item
+const mapPropsToFields = (props) =>{
+    if(JSON.stringify(props.warningSet.warningDetails) === '{}'){
+
+    }else{
+        let obj = {}
+        obj.name = props.warningSet.warningDetails.plan.name
+        obj.name2 = props.warningSet.warningDetails.items[0].val
+        obj.name3 = props.warningSet.warningDetails.items[1].isFocus === 0 ? false : true
+        obj.name4 = props.warningSet.warningDetails.items[1].val
+        obj.name5 = props.warningSet.warningDetails.items[2].isFocus === 0 ? false : true
+        obj.name6 = props.warningSet.warningDetails.items[2].val
+        obj.name7 = props.warningSet.warningDetails.items[3].val
+        obj.name8 = props.warningSet.warningDetails.items[4].isFocus === 0 ? false : true
+        obj.name9 = props.warningSet.warningDetails.items[4].val
+        obj.name10 = props.warningSet.warningDetails.items[5].isFocus === 0 ? false : true
+        obj.name11 = props.warningSet.warningDetails.items[5].val
+        obj.name12 = props.warningSet.warningDetails.items[6].isFocus === 0 ? false : true
+        obj.name13 = props.warningSet.warningDetails.items[6].val
+        obj.name14 = props.warningSet.warningDetails.items[7].isFocus === 0 ? false : true
+        obj.name15 = props.warningSet.warningDetails.items[7].status
+        obj.name16 = props.warningSet.warningDetails.items[7].val
+        return __.mapValues(obj, (item) =>{
+            return Form.createFormField({
+                value: item
+            })
+        })
+    }
+}
+class FormListCommon extends Component {
     state = {
         isShowRadioInput: false
     }
@@ -20,12 +50,13 @@ class FormSearch extends Component {
         }
     }
     handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let _val = {}
                 _val.plan = {
                     "name": values.name,
+                    "id": qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).id,
                     "deptId" : sessionStorage.getItem('deptId'),
                     "items": [{
                         "isFocus": 0,
@@ -70,9 +101,21 @@ class FormSearch extends Component {
                     }]
                 }
                 console.log(_val)
-                this.props.addPlans(_val)
+                this.props.modifyPlans(_val)
             }
         })
+    }
+    componentDidMount(){
+        // console.log(this.props.warningDetails)
+        if(this.props.warningSet.warningDetails.items[7].status === 1){
+            this.setState({
+                isShowRadioInput: true
+            })
+        }else{
+            this.setState({
+                isShowRadioInput: false
+            })
+        }
     }
     render() {
         const formItemLayout = {
@@ -89,7 +132,7 @@ class FormSearch extends Component {
         return (
             <React.Fragment>
                 <Row className="form_wrap">
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form>
                         <FormItem
                         {...formItemLayout}
                             label=""
@@ -126,9 +169,9 @@ class FormSearch extends Component {
                                                 message: '请输入离床时间',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="离床时间" />
+                                            <Input type="number" className="inputStyle" placeholder="离床时间" />
                                         )}
-                                        <span className="ant-form-text"> 分钟（默认0分钟，立即报警）</span>
+                                        {/* <span className="ant-form-text"> 分钟（默认0分钟，立即报警）</span> */}
                                     </FormItem>
                                 </span>
                             </div>
@@ -140,7 +183,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name3')(
+                                        {getFieldDecorator('name3',{
+                                            initialValue: this.props.warningSet.warningDetails.items[1].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -167,7 +213,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name5')(
+                                        {getFieldDecorator('name5',{
+                                            initialValue: this.props.warningSet.warningDetails.items[2].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -177,10 +226,10 @@ class FormSearch extends Component {
                                         {getFieldDecorator('name6', {
                                             rules: [{
                                                 required: true,
-                                                message: '请输入呼吸时间',
+                                                message: '请输入呼吸暂停时间',
                                             }],
                                         })(
-                                            <Input className="inputStyle" placeholder="请输入呼吸时间" />
+                                            <Input className="inputStyle" placeholder="请输入呼吸暂停时间" />
                                         )}
                                         <span className="ant-form-text"> 秒</span>
                                     </FormItem>
@@ -216,7 +265,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name8')(
+                                        {getFieldDecorator('name8',{
+                                            initialValue: this.props.warningSet.warningDetails.items[4].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -243,7 +295,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name10')(
+                                        {getFieldDecorator('name10',{
+                                            initialValue: this.props.warningSet.warningDetails.items[5].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -270,7 +325,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name12')(
+                                        {getFieldDecorator('name12',{
+                                            initialValue: this.props.warningSet.warningDetails.items[6].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -297,7 +355,10 @@ class FormSearch extends Component {
                             <div>
                                 <span className="firseItem">
                                     <FormItem>
-                                        {getFieldDecorator('name14')(
+                                        {getFieldDecorator('name14',{
+                                            initialValue: this.props.warningSet.warningDetails.items[7].isFocus === 0 ? false : true,
+                                            valuePropName: 'checked',
+                                        })(
                                             <Checkbox></Checkbox>
                                         )}
                                     </FormItem></span>
@@ -320,29 +381,30 @@ class FormSearch extends Component {
                                 </span>
                                 {
                                     this.state.isShowRadioInput ? (
-                                        <span className="fourItem">
-                                            <FormItem>
-                                                {getFieldDecorator('name16', {
-                                                    rules: [{
-                                                        required: true,
-                                                        message: '请输入间隔时长',
-                                                    }],
-                                                })(
-                                                    <span className="ant-form-text"> 间隔时长 <Input style={{ width: 100}} /> 小时</span>
-                                                )}
-                                            </FormItem>
-                                        </span>
+                                    <span>
+                                        <FormItem>
+                                            <span style={{ marginLeft: 100 }} className="ant-form-text"> 间隔时长</span>
+                                            {getFieldDecorator('name16', {
+                                                initialValue: this.props.warningSet.warningDetails.items[7].val,
+                                                rules: [{
+                                                    required: true,
+                                                    message: '请输入间隔时长',
+                                                }],
+                                            })(
+                                                <Input style={{ width: 100}} /> 
+                                            )}
+                                        </FormItem>
+                                    </span>
                                     ) : ''
                                 }
                             </div>
                         </FormItem>
-                        <FormItem style={{ textAlign: 'center'}}>
+                        <FormItem style={{ textAlign: 'center', marginTop: 20}}>
                             <Button
-                                type="primary"
                                 htmlType="submit"
-                                style={{ background: '#128875', border: 'none'}}
+                                className="modifyBtn"
                             >
-                                添加该方案
+                                确认修改
                             </Button>
                         </FormItem>
                     </Form>
@@ -351,22 +413,15 @@ class FormSearch extends Component {
         )
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        warningSet: state.warningSet
-    }
-}
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        addPlans(val){
+        modifyPlans(val){
             dispatch({
-                type: 'add_waring_plan_services',
+                type: 'modify_waring_plan_services',
                 payload: val
             })
         }
     }
 }
-export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(FormSearch))
-
-
+export default Form.create({mapPropsToFields})(connect(null, mapDispatchToProps)(FormListCommon))
 

@@ -14,10 +14,11 @@
 }
 .card_grid{
     width: 200px;
-    height: 90px;
     background: #fff;
     margin: 5px;
+    padding: 30px 0;
     cursor: pointer;
+    text-align: center;
 }
 .scheme_name{
     font-size: 14px;
@@ -35,10 +36,9 @@
 }
 .form_wrap{
     width: 100%;
-    height: 650px;
+    height: 616px;
     background: #fff;
-    padding: 20px;
-    border-top: 1px solid #dedede;
+    padding: 20px 20px 0;
     .ant-form-item{
         margin-bottom: 0;
     }
@@ -63,7 +63,7 @@
     .thirdItem{
         display: inline-block;
         height: 56px;
-        width: 500px;
+        width: 330px;
         vertical-align: top;
     }
     .ant-form-text{
@@ -73,5 +73,47 @@
         display: block;
         margin-left: 92px;
         margin-top: -4px;
+        margin-bottom: 20px;
     }
+}
+.addWaringItem{
+    font-size: 16px;
+    color: #128875 ;
+}
+.modifyModal{
+    .ant-modal-header{
+        background: #128875;
+        text-align: center;
+        .ant-modal-title{
+            color: #fff;
+            font-size: 20px;
+        }
+    }
+}
+.form_list_wrap{
+    width: 100%;
+    height: 500px;
+    background: #fff;
+    padding: 20px;
+    ul{
+        list-style-type: none;
+        width: 100%;
+        padding: 0;
+        li{
+            padding: 8px;
+            .item_name{
+                width: 80px;
+                display: inline-block;
+            }
+            .item_cont{
+                width: 200px;
+                display: inline-block;
+                color: #000;
+            }
+        }
+    }
+}
+.modifyBtn{
+    background: #128875 ;
+    color: #fff;
 }
