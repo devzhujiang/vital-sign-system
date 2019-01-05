@@ -76,8 +76,37 @@ function * GetWarningDetailsByIdServices(argus){
         })
     }
 }
+//修改预警方案
+function * ModifyWaringPlanServices(argus){
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-warning-plan/updatePlan',
+        json: argus.payload.plan,
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        // yield put({
+        //     type: 'get_warning_details_services',
+        //     payload:{
+        //         itemId: argus.payload.plan.id
+        //     }
+        // })
+        // yield put({
+        //     type: 'set_show_hide_form_details',
+        //     payload:{
+        //         falg: false
+        //     }
+        // })
+    }else{
+        notification.error({
+            message: '系统错误'
+        })
+    }
+}
 export function* warningSet() {
     yield takeEvery('get_warning_info_services', GetWarningInfoServices)
     yield takeEvery('add_waring_plan_services', AddWaringPlanServices)
     yield takeEvery('get_warning_details_by_id_services', GetWarningDetailsByIdServices)
+    yield takeEvery('modify_waring_plan_services', ModifyWaringPlanServices)
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Card, Button, Row, Icon } from 'antd'
+import { Card, Row, Icon } from 'antd'
 import './index.less'
-import FormList from './FormList.js'
 import __ from 'lodash'
 import AddWarningPlan from './AddWarningPlan'
 import ModifyWarningPlan from './ModifyWarningPlan'
@@ -17,6 +16,7 @@ class WarningSet extends Component {
         const {
             plans
          } = this.props.warningSet
+         console.log('aaaaaaa')
         return (
             <React.Fragment>
                 <p className="column-title">预警方案</p>

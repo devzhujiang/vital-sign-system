@@ -81,7 +81,7 @@ export function* getDeptExceptInfoServices(argus) {
         if(argus.payload.reOpenMqtt){
             //拿到设备信息，建立MQTT连接
             let client = null
-            client = new window.Paho.MQTT.Client('106.14.150.252', 8083, "mqttjs_088fa1e27d");
+            client = new window.Paho.MQTT.Client('106.14.150.252', 8083, `mqttjs_${__.random(99999999,1000000000)}`);
             client.onConnectionLost = (responseObject) =>{
                 console.log(responseObject)
                 // notification.warning({
@@ -109,7 +109,7 @@ export function* getDeptExceptInfoServices(argus) {
                 }else if(mqttMessageToJson.type === 2){
                     //预警消息MQTT
                     let _warningMsgArr = window.store.getState().main.warningMqttMsg
-                    _warningMsgArr.push(mqttMessageToJson.data)
+                    _warningMsgArr.unshift(mqttMessageToJson.data)
                     window.store.dispatch({
                         type: 'save_warning_msg_mqtt_info',
                         payload:{
@@ -128,6 +128,7 @@ export function* getDeptExceptInfoServices(argus) {
                     console.log("已建立连接");
                     client.subscribe("+/sign_data");
                     client.subscribe(`${sessionStorage.getItem('deptId')}/warning_msg`);
+                    client.subscribe(`${sessionStorage.getItem('deptId')}/hint_msg`);
                 },
                 onFailure: (err) =>{
                     notification.warning({

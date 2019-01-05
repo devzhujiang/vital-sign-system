@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
 import __ from 'lodash'
-import { Row, Col, Button, Card, Modal, Input, Select,notification } from 'antd'
+import { Row, Col, Button, Modal, Input, Select,notification } from 'antd'
 import ExchangeBeds from './ExchangeBeds.js'
 import DoubleSelect from '../../../components/DoubleSelect'
 const Option = Select.Option
@@ -89,7 +89,7 @@ class BedSet extends Component {
                         </Modal>
                     </Col>
                 </Row>
-                <Row className="bedCard mt20">
+                {/* <Row className="bedCard mt20">
                     {
                         this.props.bedSet.rooms.length === 0 ? '暂无床位信息' :
                         __.map(this.props.bedSet.rooms, (item, index) =>{
@@ -105,7 +105,7 @@ class BedSet extends Component {
                             )
                         })
                     }
-                </Row>
+                </Row> */}
                 <Row>
                     <ExchangeBeds />
                 </Row>

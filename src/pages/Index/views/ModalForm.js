@@ -119,7 +119,6 @@ export default Form.create({mapPropsToFields}) (class ModalForm extends Componen
             }
         }
         const { getFieldDecorator } = this.props.form
-        console.log(this.props.homePage.planDetails.items[7].isFocus)
         return (
             <React.Fragment>
                 <Modal

@@ -7,7 +7,8 @@ const initalState = {
         formListShow: false,
         addModal: false,
         modifyModal: false,
-        isShowModifyForm: false
+        isShowModifyForm: false,
+        planId: ''
     },
     message: '',
     warningDetails: {},
@@ -56,7 +57,8 @@ export const warningSet = (state = initalState, action) => {
                 ...state,
                 options: {
                     ...state.options,
-                    modifyModal: action.payload.flag
+                    modifyModal: action.payload.flag,
+                    planId: action.payload.id
                 }
             }
         case 'open_add_warning_modal': 
