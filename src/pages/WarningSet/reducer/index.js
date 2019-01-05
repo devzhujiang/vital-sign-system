@@ -52,6 +52,14 @@ export const warningSet = (state = initalState, action) => {
                 ...state,
                 warningDetails: {}
             }
+        case 'hide_modify_form_effects': 
+            return{
+                ...state,
+                options: {
+                    ...state.options,
+                    modifyModal: action.payload.flag,
+                }
+            }
         case 'open_modify_warning_modal': 
             return{
                 ...state,

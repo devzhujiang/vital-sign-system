@@ -86,18 +86,21 @@ function * ModifyWaringPlanServices(argus){
         }
     })
     if(data && data.code === '0'){
-        // yield put({
-        //     type: 'get_warning_details_services',
-        //     payload:{
-        //         itemId: argus.payload.plan.id
-        //     }
-        // })
-        // yield put({
-        //     type: 'set_show_hide_form_details',
-        //     payload:{
-        //         falg: false
-        //     }
-        // })
+        yield put({
+            type: 'hide_modify_form_effects',
+            payload:{
+                flag: false
+            }
+        })
+        yield put({
+            type: 'get_warning_info_services'
+        })
+        yield put({
+            type: 'clean_loading_warning_true'
+        })
+        yield put({
+            type: 'hide_modify_form'
+        })
     }else{
         notification.error({
             message: '系统错误'

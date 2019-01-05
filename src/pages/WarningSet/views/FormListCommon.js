@@ -11,23 +11,23 @@ const mapPropsToFields = (props) =>{
     }else{
         let obj = {}
         obj.name1_1 = props.warningSet.warningDetails.plan.name
-        obj.name2_1 = props.warningSet.warningDetails.items[0].isFocus === 0 ? false : true
+        obj.name2_1 = props.warningSet.warningDetails.items[0].isFocus
         obj.name2_2 = props.warningSet.warningDetails.items[0].val
-        obj.name3_1 = props.warningSet.warningDetails.items[1].isFocus === 0 ? false : true
+        obj.name3_1 = props.warningSet.warningDetails.items[1].isFocus
         obj.name3_2 = props.warningSet.warningDetails.items[1].val
         obj.name3_3 = props.warningSet.warningDetails.items[1].valEnd
-        obj.name4_1 = props.warningSet.warningDetails.items[2].isFocus === 0 ? false : true
+        obj.name4_1 = props.warningSet.warningDetails.items[2].isFocus
         obj.name4_2 = props.warningSet.warningDetails.items[2].val
-        obj.name5_1 = props.warningSet.warningDetails.items[3].isFocus === 0 ? false : true
+        obj.name5_1 = props.warningSet.warningDetails.items[3].isFocus
         obj.name5_2 = props.warningSet.warningDetails.items[3].val
         obj.name5_3 = props.warningSet.warningDetails.items[3].valEnd
-        obj.name6_1 = props.warningSet.warningDetails.items[4].isFocus === 0 ? false : true
+        obj.name6_1 = props.warningSet.warningDetails.items[4].isFocus
         obj.name6_2 = props.warningSet.warningDetails.items[4].val
-        obj.name7_1 = props.warningSet.warningDetails.items[5].isFocus === 0 ? false : true
+        obj.name7_1 = props.warningSet.warningDetails.items[5].isFocus
         obj.name7_2 = props.warningSet.warningDetails.items[5].val
-        obj.name8_1 = props.warningSet.warningDetails.items[6].isFocus === 0 ? false : true
+        obj.name8_1 = props.warningSet.warningDetails.items[6].isFocus
         obj.name8_2 = props.warningSet.warningDetails.items[6].val
-        obj.name9_1 = props.warningSet.warningDetails.items[7].isFocus === 0 ? false : true
+        obj.name9_1 = props.warningSet.warningDetails.items[7].isFocus
         obj.name9_2 = props.warningSet.warningDetails.items[7].status
         obj.name9_3 = props.warningSet.warningDetails.items[7].val
         return __.mapValues(obj, (item) =>{
@@ -35,6 +35,69 @@ const mapPropsToFields = (props) =>{
                 value: item
             })
         })
+    }
+}
+const onValuesChange = (props, values) => {
+    console.log(values)
+    if(Object.keys(values)[0] === 'name1_1'){
+        props.warningSet.warningDetails.plan.name = values.name1_1
+    }
+    if(Object.keys(values)[0] === 'name2_1'){
+        props.warningSet.warningDetails.items[0].isFocus = values.name2_1
+    }
+    if(Object.keys(values)[0] === 'name2_2'){
+        props.warningSet.warningDetails.items[0].val = values.name2_2
+    }
+    if(Object.keys(values)[0] === 'name3_1'){
+        props.warningSet.warningDetails.items[1].isFocus = values.name3_1
+    }
+    if(Object.keys(values)[0] === 'name3_2'){
+        props.warningSet.warningDetails.items[1].val = values.name3_2
+    }
+    if(Object.keys(values)[0] === 'name3_3'){
+        props.warningSet.warningDetails.items[1].valEnd = values.name3_3
+    }
+    if(Object.keys(values)[0] === 'name4_1'){
+        props.warningSet.warningDetails.items[2].isFocus = true
+    }
+    if(Object.keys(values)[0] === 'name4_2'){
+        props.warningSet.warningDetails.items[2].val = values.name4_2
+    }
+    if(Object.keys(values)[0] === 'name5_1'){
+        props.warningSet.warningDetails.items[3].isFocus = values.name5_1
+    }
+    if(Object.keys(values)[0] === 'name5_2'){
+        props.warningSet.warningDetails.items[3].val = values.name5_2
+    }
+    if(Object.keys(values)[0] === 'name5_3'){
+        props.warningSet.warningDetails.items[3].valEnd = values.name5_3
+    }
+    if(Object.keys(values)[0] === 'name6_1'){
+        props.warningSet.warningDetails.items[4].isFocus = true
+    }
+    if(Object.keys(values)[0] === 'name6_2'){
+        props.warningSet.warningDetails.items[4].val = values.name6_2
+    }
+    if(Object.keys(values)[0] === 'name7_1'){
+        props.warningSet.warningDetails.items[5].isFocus = values.name7_1
+    }
+    if(Object.keys(values)[0] === 'name7_2'){
+        props.warningSet.warningDetails.items[5].val = values.name7_2
+    }
+    if(Object.keys(values)[0] === 'name8_1'){
+        props.warningSet.warningDetails.items[6].isFocus = values.name8_1
+    }
+    if(Object.keys(values)[0] === 'name8_2'){
+        props.warningSet.warningDetails.items[6].val = values.name8_2
+    }
+    if(Object.keys(values)[0] === 'name9_1'){
+        props.warningSet.warningDetails.items[7].isFocus = values.name9_1
+    }
+    if(Object.keys(values)[0] === 'name9_2'){
+        props.warningSet.warningDetails.items[7].status = values.name9_2
+    }
+    if(Object.keys(values)[0] === 'name9_3'){
+        props.warningSet.warningDetails.items[7].val = values.name9_3
     }
 }
 class FormListCommon extends Component {
@@ -173,7 +236,7 @@ class FormListCommon extends Component {
                             <span className="firseItem">
                                 <FormItem>
                                     {getFieldDecorator('name2_1',{
-                                        initialValue: this.props.warningSet.warningDetails.items[0].isFocus === 0 ? false : true,
+                                        // initialValue: this.props.warningSet.warningDetails.items[0].isFocus === 0 ? false : true,
                                         valuePropName: 'checked',
                                     })(
                                         <Checkbox></Checkbox>
@@ -204,7 +267,7 @@ class FormListCommon extends Component {
                             <span className="firseItem">
                                     <FormItem>
                                         {getFieldDecorator('name3_1',{
-                                            initialValue: this.props.warningSet.warningDetails.items[1].isFocus === 0 ? false : true,
+                                            // initialValue: this.props.warningSet.warningDetails.items[1].isFocus === 0 ? false : true,
                                             valuePropName: 'checked',
                                         })(
                                             <Checkbox></Checkbox>
@@ -270,7 +333,7 @@ class FormListCommon extends Component {
                             <span className="firseItem">
                                 <FormItem>
                                     {getFieldDecorator('name5_1',{
-                                        initialValue: this.props.warningSet.warningDetails.items[4].isFocus === 0 ? false : true,
+                                        // initialValue: this.props.warningSet.warningDetails.items[4].isFocus === 0 ? false : true,
                                         valuePropName: 'checked',
                                     })(
                                         <Checkbox></Checkbox>
@@ -336,7 +399,7 @@ class FormListCommon extends Component {
                                 <span className="firseItem">
                                     <FormItem>
                                         {getFieldDecorator('name7_1',{
-                                            initialValue: this.props.warningSet.warningDetails.items[6].isFocus === 0 ? false : true,
+                                            // initialValue: this.props.warningSet.warningDetails.items[6].isFocus === 0 ? false : true,
                                             valuePropName: 'checked',
                                         })(
                                             <Checkbox></Checkbox>
@@ -367,7 +430,7 @@ class FormListCommon extends Component {
                                 <span className="firseItem">
                                     <FormItem>
                                         {getFieldDecorator('name8_1',{
-                                            initialValue: this.props.warningSet.warningDetails.items[5].isFocus === 0 ? false : true,
+                                            // initialValue: this.props.warningSet.warningDetails.items[5].isFocus === 0 ? false : true,
                                             valuePropName: 'checked',
                                         })(
                                             <Checkbox></Checkbox>
@@ -398,7 +461,7 @@ class FormListCommon extends Component {
                                 <span className="firseItem">
                                     <FormItem>
                                         {getFieldDecorator('name9_1',{
-                                            initialValue: this.props.warningSet.warningDetails.items[7].isFocus === 0 ? false : true,
+                                            // initialValue: this.props.warningSet.warningDetails.items[7].isFocus === 0 ? false : true,
                                             valuePropName: 'checked',
                                         })(
                                             <Checkbox></Checkbox>
@@ -466,5 +529,5 @@ const mapDispatchToProps = (dispatch, props) => {
         }
     }
 }
-export default Form.create({mapPropsToFields})(connect(null, mapDispatchToProps)(FormListCommon))
+export default Form.create({mapPropsToFields, onValuesChange})(connect(null, mapDispatchToProps)(FormListCommon))
 

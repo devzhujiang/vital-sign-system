@@ -14,7 +14,7 @@ export default class Message extends Component {
                 <ul className="messageList">
                 {
                     warningMqttMsg.length === 0 ? '暂无预警数据' :
-                    warningMqttMsg.map((item) =>{
+                    warningMqttMsg.slice(0, 10).map((item) =>{
                         return(
                             <li key={Math.random()}>
                                 <div>

@@ -91,7 +91,7 @@ export function* getDeptExceptInfoServices(argus) {
             }
             client.onMessageArrived = (message) =>{
                 let mqttMessageToJson = JSON.parse(message.payloadString)
-                console.log(mqttMessageToJson)
+                // console.log(mqttMessageToJson)
                 if(mqttMessageToJson.type === 1){
                     //病人MQTT信息
                     let _data = window.store.getState().main.indexCardInfo

@@ -16,7 +16,6 @@ class WarningSet extends Component {
         const {
             plans
          } = this.props.warningSet
-         console.log('aaaaaaa')
         return (
             <React.Fragment>
                 <p className="column-title">预警方案</p>

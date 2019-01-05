@@ -102,7 +102,6 @@ class FormSearch extends Component {
         })
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
         if(nextProps.warningDetails.planDetails.items[7].status === 1){
             this.setState({
                 isShowRadioInput: true
@@ -113,17 +112,6 @@ class FormSearch extends Component {
             })
         }
     }
-    // componentDidMount(){
-    //     if(this.props.warningDetails.planDetails.items[7].status === 1){
-    //         this.setState({
-    //             isShowRadioInput: true
-    //         })
-    //     }else{
-    //         this.setState({
-    //             isShowRadioInput: false
-    //         })
-    //     }
-    // }
     render() {
         const formItemLayout = {
             labelCol: {
