@@ -78,7 +78,12 @@ function * breathDataServices(argus){
         }
     })
     if(data && data.code === '0'){
-        console.log(data)
+        yield put({
+            type: 'save_breath_data',
+            payload:{
+                data: data.data
+            }
+        })
     }
 }
 //心率
@@ -96,10 +101,15 @@ function * heartDataServices(argus){
         }
     })
     if(data && data.code === '0'){
-        console.log(data)
+        yield put({
+            type: 'save_heart_data',
+            payload:{
+                data: data.data
+            }
+        })
     }
 }
-//心率
+//在离床
 function * leaveBedDataServices(argus){
     const data = yield call(requestServices.fetch,{
         resource: '/userreport/livebed',
@@ -114,7 +124,53 @@ function * leaveBedDataServices(argus){
         }
     })
     if(data && data.code === '0'){
-        console.log(data)
+        // console.log(data)
+    }
+}
+//体动
+function * bodyMoveDataServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/userreport/bodymotion',
+        params:{
+            patientId: argus.payload.query.id,
+            type: 0,
+            // startTimeStr: argus.payload.id,
+            // endTimeStr: argus.payload.id,
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        yield put({
+            type: 'save_body_move_data',
+            payload:{
+                data: data.data
+            }
+        })
+    }
+}
+//护理巡查
+function * inspectDataServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/userreport/inspect',
+        params:{
+            patientId: argus.payload.query.id,
+            type: 0,
+            // startTimeStr: argus.payload.id,
+            // endTimeStr: argus.payload.id,
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        yield put({
+            type: 'save_inspect_data',
+            payload:{
+                data: data.data
+            }
+        })
     }
 }
 export function* visualCharts() {
@@ -124,4 +180,6 @@ export function* visualCharts() {
     yield takeEvery('breath_data_services', breathDataServices)
     yield takeEvery('heart_data_services', heartDataServices)
     yield takeEvery('leave_bed_data_services', leaveBedDataServices)
+    yield takeEvery('body_move_data_services', bodyMoveDataServices)
+    yield takeEvery('inspect_data_services', inspectDataServices)
 }

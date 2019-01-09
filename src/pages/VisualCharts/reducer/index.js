@@ -4,10 +4,34 @@ const initalState = {
     },
     message: '',
     visible: false,
-    planDetails: {}
+    planDetails: {},
+    breathData: {},
+    heartData: {},
+    bodyMoveData: {},
+    inspectData: {},
 }
 export const visualCharts = (state = initalState, action) => {
     switch (action.type) {
+        case 'save_breath_data': 
+            return{
+                ...state,
+                breathData: action.payload.data
+            }
+        case 'save_heart_data': 
+            return{
+                ...state,
+                heartData: action.payload.data
+            }
+        case 'save_body_move_data': 
+            return{
+                ...state,
+                bodyMoveData: action.payload.data
+            }
+        case 'save_inspect_data': 
+            return{
+                ...state,
+                inspectData: action.payload.data
+            }
         case 'save_charts_modal_form_details': 
             return{
                 ...state,

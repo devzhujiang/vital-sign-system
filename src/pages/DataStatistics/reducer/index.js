@@ -6,7 +6,7 @@ const initalState = {
     dataTable: [],
     pagination:{
         current: 1,
-        pageSize: 1,
+        pageSize: 10,
         total: undefined
     },
     deptTongjiInfo:{},

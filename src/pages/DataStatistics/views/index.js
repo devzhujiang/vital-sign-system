@@ -10,10 +10,15 @@ class DataStatistics extends Component {
     render() {
         const columns = [{
             title: '床号',
-            dataIndex: 'sickInfo'
+            dataIndex: 'sickInfo',
+            render(text, record, index){
+                return(
+                    <span>{record.sickInfo ? record.sickInfo : '--'}</span>
+                )
+            }
         },{
             title: '病人姓名',
-            dataIndex: 'patientName'
+            dataIndex: 'patient.name'
         },{
             title: '预警时间',
             dataIndex: 'processTime',
@@ -30,7 +35,7 @@ class DataStatistics extends Component {
             dataIndex: 'operator',
             render(text, record, index) {
                 return(
-                    <div><Button type="primary">查看详情</Button></div>
+                    <div><Button type="primary">处理</Button></div>
                 )
             }
         }]
@@ -78,7 +83,7 @@ class DataStatistics extends Component {
                             onChange={onTableChange.bind(this)}
                             pagination={{
                                 ...pagination,
-                                pageSizeOptions: ['1','10', '20', '30', '40'],
+                                pageSizeOptions: ['10', '20', '30', '40'],
                                 showSizeChanger: true,
                                 showQuickJumper: true,
                                 showTotal: total => `共 ${total} 项`,

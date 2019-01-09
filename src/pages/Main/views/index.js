@@ -55,7 +55,7 @@ class Main extends Component {
                     this.props.location.pathname === '/login' ? '' :
                     <Layout id="self_theme">
                         <Sider 
-                            style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+                            style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, zIndex: 999 }}
                             trigger={null}
                             collapsible
                             collapsed={this.state.collapsed}
