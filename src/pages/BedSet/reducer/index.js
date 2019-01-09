@@ -16,10 +16,54 @@ const initalState = {
     firstCascaderData: [],
     secondCascaderData: [],
     devicesAvaInfo: [],
-    sickRoomForSelect: []
+    sickRoomForSelect: [],
+
+    paitentsFirstData: [],
+    paitentsSecondData: [],
+    paitentsThirdData: [],
+    paitentsFourData: [],
+    devicesFirstData: [],
+    devicesSecondData: [],
+    devicesFourData: [],
+    
 }
 export const bedSet = (state = initalState, action) => {
     switch (action.type) {
+        case 'save_first_data_to_store': 
+            return{
+                ...state,
+                paitentsFirstData: action.payload.data
+            }
+        case 'save_second_data_to_store': 
+            return{
+                ...state,
+                paitentsSecondData: action.payload.data
+            }
+        case 'save_third_data_to_store': 
+            return{
+                ...state,
+                paitentsThirdData: action.payload.data
+            }
+        case 'save_four_data_to_store': 
+            return{
+                ...state,
+                paitentsFourData: action.payload.data
+            }
+        case 'save_devices_first_data_to_store': 
+            return{
+                ...state,
+                devicesFirstData: action.payload.data
+            }
+        case 'save_devices_second_data_to_store': 
+            return{
+                ...state,
+                devicesSecondData: action.payload.data
+            }
+        case 'save_devices_four_data_to_store': 
+            return{
+                ...state,
+                devicesFourData: action.payload.data
+            }
         case 'save_sick_rooms_for_select':
             return{
                 ...state,

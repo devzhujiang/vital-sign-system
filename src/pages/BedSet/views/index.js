@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
 import __ from 'lodash'
-import { Row, Col, Button, Modal, Input, Select,notification } from 'antd'
-import ExchangeBeds from './ExchangeBeds.js'
+import { Row, Col, Button, Modal, Input, Select,notification, Card } from 'antd'
+import SearchForm from './SearchForm'
+import SearchFormDevices from './SearchFormDevices'
 import DoubleSelect from '../../../components/DoubleSelect'
 const Option = Select.Option
 class BedSet extends Component {
     componentDidMount() {
         this.props.getDepartmentBeds()
-        // this.props.addDepartmentRooms()
-        // this.props.addDepartmentBeds()
-        // this.props.getDepartmentInfo()
+        this.props.getDepartmentInfo()
         // this.props.getBedsForExchange()
     }
     render() {
@@ -89,7 +88,7 @@ class BedSet extends Component {
                         </Modal>
                     </Col>
                 </Row>
-                {/* <Row className="bedCard mt20">
+                <Row className="bedCard mt20">
                     {
                         this.props.bedSet.rooms.length === 0 ? '暂无床位信息' :
                         __.map(this.props.bedSet.rooms, (item, index) =>{
@@ -105,9 +104,23 @@ class BedSet extends Component {
                             )
                         })
                     }
-                </Row> */}
+                </Row>
                 <Row>
-                    <ExchangeBeds />
+                    <React.Fragment>
+                        <p className="column-title mt20">换床管理</p>
+                        <Row className="mt20 exchangeBg">
+                            <div className="paitentAreaTitle">病人换床</div>
+                            <div className="paitentFormList">
+                                <SearchForm {...this.props} />
+                            </div>
+                        </Row>
+                        <Row className="mt20 exchangeBg">
+                            <div className="paitentAreaTitle">设备换床</div>
+                            <div className="paitentFormList">
+                                <SearchFormDevices {...this.props} />
+                            </div>
+                        </Row>
+                    </React.Fragment>
                 </Row>
             </React.Fragment>
         )
@@ -212,33 +225,6 @@ const mapDispatchToProps = (dispatch, props) => {
             })
             dispatch({
                 type: 'get_depart_sick_room_for_select'
-            })
-        },
-        //获取指定科室下面的所有病房，用于病人换床
-        getBedsForExchange() {
-            dispatch({
-                type: 'get_all_beds_for_exchange'
-            })
-            // dispatch({
-            //     type: 'get_has_user_beds_services'
-            // })
-            // dispatch({
-            //     type: 'get_empty_beds_services'
-            // })
-            // //病人换床
-            // dispatch({
-            //     type: 'patient_exchange_beds_services'
-            // })
-            
-            dispatch({
-                type: 'get_all_beds_no_user_services'
-            })
-            dispatch({
-                type: 'get_all_device_bed_services'
-            })
-            //设备换床
-            dispatch({
-                type: 'device_exchange_bed_services'
             })
         },
     }
