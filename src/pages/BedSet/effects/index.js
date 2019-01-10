@@ -1,6 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import requestServices from '../../../services/index'
 import { notification } from 'antd'
+import __ from 'lodash'
 function * GetDepartmentBedsServices(){
     //获取科室床位信息
     const data = yield call(requestServices.fetch,{
@@ -243,6 +244,20 @@ function * GetDepartmentSickRoomServices(){
         }
     })
     if(data && data.code === '0'){
+        const firstOptions = __.map(data.data.rooms, (item, index) =>{
+            return{
+                value: item.id,
+                label: item.sn,
+                isLeaf: false
+            }
+        })
+        yield put({
+            type: 'save_sick_rooms_for_select',
+            payload:{
+                data: firstOptions,
+            }
+        })
+
         yield put({
             type: 'save_rooms_info_to_store',
             payload:{

@@ -187,9 +187,19 @@ module.exports = {
                 loader: "less-loader",
                 options: {
                   javascriptEnabled: true,
-                  modifyVars: require("../theme.js")
+                  modifyVars: {
+                    "primary-color": "#0E7262",                         
+                    "link-color": "#0E7262",                   
+                    "success-color": "#52c41a",                        
+                    "warning-color": "#faad14",                
+                    "error-color": "#f5222d",                   
+                    "font-size-base": "14px",                     
+                    "border-radius-base": "4px",                        
+                    "border-color-base": "#d9d9d9",               
+                    "box-shadow-base": "0 2px 8px rgba(0, 0, 0, .15)", 
+                  }
                 }
-              }
+            }
             ]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
