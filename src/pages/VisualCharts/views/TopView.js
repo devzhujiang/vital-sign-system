@@ -66,7 +66,11 @@ class TopView extends Component {
                         </div>
                     </Col>
                 </Row>
-                <ModalForm {...this.props} query={query} />
+                {
+                    JSON.stringify(this.props.visualCharts.planDetails) !== '{}' && (
+                        <ModalForm {...this.props} query={query} />
+                    )
+                }
             </React.Fragment>
         )
     }
@@ -91,12 +95,12 @@ const mapDispatchToProps = (dispatch, props) => {
                 type: 'open_charts_form_modal',
                 payload: true
             })
-            dispatch({
-                type: 'get_charts_form_details',
-                payload:{
-                    id: query.planId
-                }
-            })
+            // dispatch({
+            //     type: 'get_charts_form_details',
+            //     payload:{
+            //         id: query.planId
+            //     }
+            // })
         },
         onCloseModalForm(){
             dispatch({

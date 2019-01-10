@@ -509,7 +509,7 @@ export default Form.create({mapPropsToFields, onValuesChange}) (class ModalForm 
                                         <FormItem>
                                             <span style={{ marginLeft: 100 }} className="ant-form-text"> 间隔时长</span>
                                             {getFieldDecorator('name9_3', {
-                                                // initialValue: this.props.warningSet.warningDetails.items[7].val,
+                                                initialValue: this.props.homePage.planDetails.items[7].val,
                                                 rules: [{
                                                     required: true,
                                                     message: '请输入间隔时长',

@@ -74,6 +74,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         getBreathData(query){
             dispatch({
+                type: 'get_charts_form_details',
+                payload:{
+                    id: query.planId
+                }
+            })
+            dispatch({
                 type: 'breath_data_services',
                 payload:{
                     query
