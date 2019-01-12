@@ -1,6 +1,27 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import requestServices from '../../../services/index'
 import { notification } from 'antd'
+//根据住院id获取住院详情
+function * GetHospitalInfoServices(argus){
+    const data = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-hospitalized/getHosById',
+        params:{
+            id: argus.payload.hospitalId
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        console.log(data)
+        yield put({
+            type: 'save_hospital_info_to_store',
+            payload:{
+                data: data.data
+            }
+        })
+    }
+}
 //根据id获取预警详情
 function * GetChartsFormDetails(argus){
     const data = yield call(requestServices.fetch,{
@@ -182,4 +203,5 @@ export function* visualCharts() {
     yield takeEvery('leave_bed_data_services', leaveBedDataServices)
     yield takeEvery('body_move_data_services', bodyMoveDataServices)
     yield takeEvery('inspect_data_services', inspectDataServices)
+    yield takeEvery('get_hospital_info_services', GetHospitalInfoServices)
 }

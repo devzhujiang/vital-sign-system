@@ -12,8 +12,11 @@ class AdmissionHospital extends Component {
     render() {
         const { 
             enterHospital,
-            
+            admissionHospital:{
+                deptTongjiInfo
+            }
          } = this.props
+         console.log(deptTongjiInfo)
         return (
             <React.Fragment>
                 <div className="admissionHospital">
@@ -25,19 +28,19 @@ class AdmissionHospital extends Component {
                     </div>
                     <div className="bedsInfo">
                         <div className="content-item">
-                            <p className="roomsCount">10</p>
+                            <p className="roomsCount">{deptTongjiInfo && deptTongjiInfo.roomCount}</p>
                             <p className="roomsName">病房数</p>
                         </div>      
                         <div className="content-item">
-                            <p className="roomsCount">10</p>
+                            <p className="roomsCount">{deptTongjiInfo && deptTongjiInfo.bedCount}</p>
                             <p className="roomsName">总床位</p>
                         </div>
                         <div className="content-item">
-                            <p className="roomsCount">10</p>
+                            <p className="roomsCount">{deptTongjiInfo && deptTongjiInfo.bedInCount}</p>
                             <p className="roomsName">入住床位</p>
                         </div>         
                         <div className="content-item">
-                            <p className="roomsCount">10</p>
+                            <p className="roomsCount">{deptTongjiInfo && deptTongjiInfo.bedOutCount}</p>
                             <p className="roomsName">剩余床位</p>
                         </div>                             
                     </div>
@@ -78,6 +81,9 @@ const mapDispatchToProps = (dispatch, props) => {
         getWaringPlansList(){
             dispatch({
                 type: 'get_waring_plans_list'
+            })
+            dispatch({
+                type: 'get_data_statics_message_to_ad'
             })
         },
         onSubmitForm(e){

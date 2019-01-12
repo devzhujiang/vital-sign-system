@@ -9,9 +9,15 @@ const initalState = {
     heartData: {},
     bodyMoveData: {},
     inspectData: {},
+    hospitalInfo: {}
 }
 export const visualCharts = (state = initalState, action) => {
     switch (action.type) {
+        case 'save_hospital_info_to_store': 
+            return{
+                ...state,
+                hospitalInfo: action.payload.data
+            }
         case 'save_breath_data': 
             return{
                 ...state,

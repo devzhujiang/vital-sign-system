@@ -28,7 +28,7 @@ class DoubleSelect extends Component {
         setTimeout(() => {
             targetOption.loading = false;
             requestServices.fetch({
-                resource: '/api/vital/t-vital-sickbed/beds',
+                resource: '/api/vital/t-vital-sickbed/noDeviceBeds',
                 params:{
                     roomId: selectedOptions[0].value
                 },

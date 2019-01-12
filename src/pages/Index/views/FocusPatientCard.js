@@ -27,7 +27,7 @@ export default class FocusPatientCard extends Component {
                                             <Card
                                                 className="patient-card"
                                             >
-                                                <Link  to={`/visualCharts?id=${item.patient.id}&planId=${item.planId}`}>
+                                                <Link  to={`/visualCharts?id=${item.patient.id}&planId=${item.planId}&hospitalId=${item.id}`}>
                                                     <div className="cardTopSpe">
                                                         <div className="personInfo">
                                                             <div className="patientBeds">{item.sickbed.sn}</div>

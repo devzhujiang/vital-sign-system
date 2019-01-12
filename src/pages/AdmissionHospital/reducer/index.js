@@ -19,9 +19,15 @@ const initalState = {
         field: 'hospitalStay',
         order: 'descend'
     },
+    deptTongjiInfo:{},
 }
 export const admissionHospital = (state = initalState, action) => {
     switch (action.type) {
+        case 'tongji_to_store_to_ad': 
+            return{
+                ...state,
+                deptTongjiInfo: action.payload
+            }
         case 'modify_sort_table': 
             return{
                 ...state,

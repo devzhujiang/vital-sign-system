@@ -1,6 +1,28 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import requestServices from '../../../services/index'
 import { notification } from 'antd'
+//统计数据
+function * GetDataStaticsMessageToAd(){
+    const tongji = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-department/tongji',
+        params:{
+            id: sessionStorage.getItem('deptId')
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(tongji && tongji.code === '0'){
+        yield put({
+            type: 'tongji_to_store_to_ad',
+            payload: tongji.data
+        })
+    }else{
+        notification.error({
+            message: '系统错误'
+        })
+    }
+}
 //获取预警方案
 function * GetWaringPlansLists(){
     const data = yield call(requestServices.fetch,{
@@ -165,4 +187,5 @@ export function* admissionHospital() {
     yield takeEvery('sick_people_leave_hospital', LeaveHospitalServices)
     yield takeEvery('sick_people_leave_services', LeaveSickServices)
     yield takeEvery('get_table_info_services', GetTableInfoServices)
+    yield takeEvery('get_data_statics_message_to_ad', GetDataStaticsMessageToAd)
 }

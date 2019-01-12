@@ -62,17 +62,17 @@ class DataStatistics extends Component {
                             <p className="roomsName">实际入住</p>
                         </div>
                         <div className="content-item">
-                            <p className="roomsCount">{deptTongjiInfo.bedInCount}</p>
+                            <p className="roomsCount">{deptTongjiInfo.inHos}</p>
                             <p className="roomsName">新入院</p>
                         </div>         
                         <div className="content-item">
                             <p className="roomsCount">{deptTongjiInfo.outHos}</p>
                             <p className="roomsName">出院人数</p>
                         </div>    
-                        <div className="content-item">
+                        {/* <div className="content-item">
                             <p className="roomsCount">{deptTongjiInfo.roomCount}</p>
                             <p className="roomsName">预警次数</p>
-                        </div>                             
+                        </div>                              */}
                     </div>
                     <div className="dataTable">
                         <div className="column-title">预警数据</div>

@@ -7,6 +7,7 @@ class WarningDetail extends Component {
             warningDetails,
             spinning
         } = this.props.warningSet
+        console.log(warningDetails)
         return (
             <React.Fragment>
                 <Spin spinning={spinning}>
@@ -21,35 +22,35 @@ class WarningDetail extends Component {
                                         </li>
                                         <li>
                                             <span className="item_name">离床时间</span>
-                                            <span className="item_cont">{warningDetails.items[0].val}</span>
+                                            <span className="item_cont">{warningDetails.items[0].val} 分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">呼吸</span>
-                                            <span className="item_cont">{warningDetails.items[1].val}</span>
+                                            <span className="item_cont">{warningDetails.items[1].val}次/分钟 - {warningDetails.items[1].valEnd}次/分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">呼吸暂停</span>
-                                            <span className="item_cont">{warningDetails.items[2].val}</span>
+                                            <span className="item_cont">{warningDetails.items[2].val}次/分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">心率</span>
-                                            <span className="item_cont">{warningDetails.items[3].val}</span>
+                                            <span className="item_cont">{warningDetails.items[3].val}次/分钟 - {warningDetails.items[3].valEnd}次/分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">心率暂停</span>
-                                            <span className="item_cont">{warningDetails.items[4].val}</span>
+                                            <span className="item_cont">{warningDetails.items[4].val}次/分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">体动</span>
-                                            <span className="item_cont">{warningDetails.items[5].val}</span>
+                                            <span className="item_cont">{warningDetails.items[5].val}次/分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">睡眠时长</span>
-                                            <span className="item_cont">{warningDetails.items[6].val}</span>
+                                            <span className="item_cont">{warningDetails.items[6].val}分钟</span>
                                         </li>
                                         <li>
                                             <span className="item_name">巡检</span>
-                                            <span className="item_cont">{warningDetails.items[7].val}</span>
+                                            <span className="item_cont">{warningDetails.items[7].val}分钟</span>
                                         </li>
                                     </ul>
                                     <div style={{ width: '100%', textAlign: 'center', marginTop: 50}}>
