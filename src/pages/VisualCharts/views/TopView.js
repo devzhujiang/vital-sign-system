@@ -19,7 +19,7 @@ class TopView extends Component {
             <React.Fragment>
                 <Row className="charts_top">
                     <Col className="avatar" span={3}>
-                        <Avatar className="avatar_img" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                        <Avatar style={{ backgroundColor: '#52c41a', fontSize: 28 }} icon="user" />
                     </Col>
                     <Col className="charts_info_center" span={17}>
                         <div className="sick_top">

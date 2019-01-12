@@ -3,6 +3,7 @@ import { Card, Avatar, Icon } from 'antd'
 import './index.less'
 import ModalForm from './ModalForm.js'
 import { Link } from 'react-router-dom'
+import __ from 'lodash'
 export default class FocusPatientCard extends Component {
     render() {
         const{
@@ -42,14 +43,15 @@ export default class FocusPatientCard extends Component {
                                                     </div>
                                                     <div className="cardCont">
                                                         <div className="cardContDetails">
-                                                            <span className="count">{ item.device ? (item.device.heartbeat ? item.device.heartbeat : '无')  : '无'}</span>
+                                                            <span className="count">{ item.device ? (item.device.heartbeat ? ((60 <= __.round(item.device.heartbeat) && __.round(item.device.heartbeat) <= 80) ? __.round(item.device.heartbeat) : (<span style={{ color: '#ff0000'}}>{__.round(item.device.heartbeat)}</span>)) : '无')  : '无'}</span>
                                                             <span className="name">心率</span>
                                                         </div>
                                                         <div className="cardContDetails">
-                                                            <span className="count">{ item.device ? (item.device.breath ? item.device.breath : '无')  : '无'}</span>
+                                                            <span className="count">{ item.device ? (item.device.breath ? ((12 <= __.round(item.device.breath) && __.round(item.device.breath) <= 20) ? __.round(item.device.breath) : (<span style={{ color: '#ff0000'}}>{__.round(item.device.breath)}</span>)) : '无')  : '无'}</span>
                                                             <span className="name">呼吸</span>
                                                         </div>
                                                         <div className="cardContDetails">
+                                                            {/* <span className="count">{ item.device ? (item.device.body_movement ? ((12 <= __.round(item.device.breath) && __.round(item.device.breath) <= 20) ? __.round(item.device.breath) : (<span style={{ color: '#ff0000'}}>{__.round(item.device.breath)}</span>)) : '无')  : '无'}</span> */}
                                                             <span className="count">{ item.device ? (item.device.body_movement ? item.device.body_movement : '无')  : '无'}</span>
                                                             <span className="name">体动</span>
                                                         </div>
