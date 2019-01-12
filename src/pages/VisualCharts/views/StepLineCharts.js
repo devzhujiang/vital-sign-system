@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './index.less'
 import ReactEcharts from 'echarts-for-react'
+import { Spin } from 'antd'
 export default class StepLineCharts extends Component {
     render() {
         const getOtion = () => {
@@ -43,12 +44,17 @@ export default class StepLineCharts extends Component {
                 ]
             }
         }
+        const {
+            leaveBedLoading
+        } = this.props.visualCharts
         return (
             <React.Fragment>
-                <ReactEcharts
-                    option={getOtion()}
-                    className="charts-bg-style"
-                />
+                <Spin spinning={leaveBedLoading}>
+                    <ReactEcharts
+                        option={getOtion()}
+                        className="charts-bg-style"
+                    />
+                </Spin>
             </React.Fragment>
         )
     }

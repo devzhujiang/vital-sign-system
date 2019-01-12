@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './index.less'
 import ReactEcharts from 'echarts-for-react'
+import { Spin } from 'antd'
 import __ from 'lodash'
 import moment from 'moment'
 export default class BreathCharts extends Component {
     render() {
         const getOtion = () => {
             const {
-                breathData
+                breathData,
             } = this.props.visualCharts
             __.map(breathData.datas, (item) => {
                 item.time = moment(item.timeStamp).format('hh:mm:ss')
@@ -50,12 +51,17 @@ export default class BreathCharts extends Component {
                 }]
             }
         }
+        const {
+            breathLoading
+        } = this.props.visualCharts
         return (
             <React.Fragment>
-                <ReactEcharts
-                    option={getOtion()}
-                    className="charts-bg-style"
-                />
+                <Spin spinning={breathLoading}>
+                    <ReactEcharts
+                        option={getOtion()}
+                        className="charts-bg-style"
+                    />
+                </Spin>
             </React.Fragment>
         )
     }

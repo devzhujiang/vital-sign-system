@@ -9,10 +9,19 @@ const initalState = {
     heartData: {},
     bodyMoveData: {},
     inspectData: {},
-    hospitalInfo: {}
+    hospitalInfo: {},
+    breathLoading: false,
+    bodyMoveLoading: false,
+    heartLoading: false,
+    leaveBedLoading: false,
 }
 export const visualCharts = (state = initalState, action) => {
     switch (action.type) {
+        case 'change_loading_status': 
+            return{
+                ...state,
+                [action.payload.name]: action.payload.status
+            }
         case 'save_hospital_info_to_store': 
             return{
                 ...state,

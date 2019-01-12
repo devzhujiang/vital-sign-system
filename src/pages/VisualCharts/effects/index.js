@@ -86,6 +86,13 @@ function * IsFocusPaitentServices(argus){
 }
 //呼吸
 function * breathDataServices(argus){
+    yield put({
+        type: 'change_loading_status',
+        payload:{
+            name: 'breathLoading',
+            status: true
+        }
+    })
     const data = yield call(requestServices.fetch,{
         resource: '/userreport/breath',
         params:{
@@ -100,6 +107,13 @@ function * breathDataServices(argus){
     })
     if(data && data.code === '0'){
         yield put({
+            type: 'change_loading_status',
+            payload:{
+                name: 'breathLoading',
+                status: false
+            }
+        })
+        yield put({
             type: 'save_breath_data',
             payload:{
                 data: data.data
@@ -109,6 +123,13 @@ function * breathDataServices(argus){
 }
 //心率
 function * heartDataServices(argus){
+    yield put({
+        type: 'change_loading_status',
+        payload:{
+            name: 'heartLoading',
+            status: true
+        }
+    })
     const data = yield call(requestServices.fetch,{
         resource: '/userreport/heart',
         params:{
@@ -123,6 +144,13 @@ function * heartDataServices(argus){
     })
     if(data && data.code === '0'){
         yield put({
+            type: 'change_loading_status',
+            payload:{
+                name: 'heartLoading',
+                status: false
+            }
+        })
+        yield put({
             type: 'save_heart_data',
             payload:{
                 data: data.data
@@ -132,6 +160,13 @@ function * heartDataServices(argus){
 }
 //在离床
 function * leaveBedDataServices(argus){
+    yield put({
+        type: 'change_loading_status',
+        payload:{
+            name: 'leaveBedLoading',
+            status: true
+        }
+    })
     const data = yield call(requestServices.fetch,{
         resource: '/userreport/livebed',
         params:{
@@ -145,11 +180,25 @@ function * leaveBedDataServices(argus){
         }
     })
     if(data && data.code === '0'){
+        yield put({
+            type: 'change_loading_status',
+            payload:{
+                name: 'leaveBedLoading',
+                status: false
+            }
+        })
         // console.log(data)
     }
 }
 //体动
 function * bodyMoveDataServices(argus){
+    yield put({
+        type: 'change_loading_status',
+        payload:{
+            name: 'bodyMoveLoading',
+            status: true
+        }
+    })
     const data = yield call(requestServices.fetch,{
         resource: '/userreport/bodymotion',
         params:{
@@ -163,6 +212,13 @@ function * bodyMoveDataServices(argus){
         }
     })
     if(data && data.code === '0'){
+        yield put({
+            type: 'change_loading_status',
+            payload:{
+                name: 'bodyMoveLoading',
+                status: false
+            }
+        })
         yield put({
             type: 'save_body_move_data',
             payload:{

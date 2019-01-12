@@ -3,6 +3,7 @@ import './index.less'
 import ReactEcharts from 'echarts-for-react'
 import __ from 'lodash'
 import moment from 'moment'
+import { Spin } from 'antd'
 export default class HeartCharts extends Component {
     render() {
         const getOtion = () => {
@@ -50,12 +51,17 @@ export default class HeartCharts extends Component {
                 }]
             }
         }
+        const {
+            heartLoading
+        } = this.props.visualCharts
         return (
             <React.Fragment>
-                <ReactEcharts
-                    option={getOtion()}
-                    className="charts-bg-style"
-                />
+                <Spin spinning={heartLoading}>
+                    <ReactEcharts
+                        option={getOtion()}
+                        className="charts-bg-style"
+                    />
+                </Spin>
             </React.Fragment>
         )
     }
