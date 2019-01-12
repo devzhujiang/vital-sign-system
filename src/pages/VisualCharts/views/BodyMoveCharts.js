@@ -10,7 +10,7 @@ export default class BodyMoveCharts extends Component {
                 bodyMoveData
             } = this.props.visualCharts
             __.map(bodyMoveData.datas, (item) => {
-                item.time = moment(item.timeStamp).format('mm:ss')
+                item.time = moment(item.timeStamp).format('hh:mm:ss')
             })
             return {
                 title: {

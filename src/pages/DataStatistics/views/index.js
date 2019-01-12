@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
-import { Table, Button } from 'antd'
+import { Table, Button, Badge } from 'antd'
+// import __ from 'lodash'
 class DataStatistics extends Component {
     componentDidMount(){
         this.props.getWarningMessage()
         this.props.getDataStaticsData()
     }
+    onSelectChange = (selectedRowKeys) => {
+        // let ids = []
+        // __.forEach(selectedRows,(item) => {
+        //     ids.push(item.id)
+        // })
+        this.props.setSelectRowKeys(selectedRowKeys)
+    }
     render() {
+        const { 
+            dataStatistics:{
+                dataTable, 
+                deptTongjiInfo,
+                pagination,
+                loading,
+                selectedRowKeys,
+                isUsefull
+            },
+            onTableChange,
+            batchProcessMessage
+         } = this.props
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        }
         const columns = [{
             title: '床号',
             dataIndex: 'sickInfo',
@@ -35,19 +59,18 @@ class DataStatistics extends Component {
             dataIndex: 'operator',
             render(text, record, index) {
                 return(
-                    <div><Button type="primary">处理</Button></div>
+                    <div>
+                        {
+                            record.status === 0 ? (
+                                <Button onClick={batchProcessMessage.bind(this, record.id)} type="primary">处理</Button>
+                            ):(
+                                <span style={{ color: '#333'}}><Badge status="success" text="已处理" /></span>
+                            )
+                        }
+                    </div>
                 )
             }
         }]
-        const { 
-            dataStatistics:{
-                dataTable, 
-                deptTongjiInfo,
-                pagination,
-                loading
-            },
-            onTableChange
-         } = this.props
         return (
             <React.Fragment>
                 <div className="dataStatistics">
@@ -75,9 +98,13 @@ class DataStatistics extends Component {
                         </div>                              */}
                     </div>
                     <div className="dataTable">
-                        <div className="column-title">预警数据</div>
+                        <div className="column-title">
+                            <span className="columnLeft">预警数据</span>
+                            <Button onClick={batchProcessMessage.bind(this, 'batch')} disabled={isUsefull} type="primary" className="columnRight">批量处理</Button>
+                        </div>
                         <Table 
                             columns={columns} 
+                            rowSelection={rowSelection}
                             dataSource={dataTable} 
                             rowKey="id"
                             onChange={onTableChange.bind(this)}
@@ -104,6 +131,35 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        batchProcessMessage(id){
+            console.log(id)
+            dispatch({
+                type: 'batch_process_message_services',
+                payload:{
+                    id
+                }
+            })
+        },
+        setSelectRowKeys(params){
+            console.log(params)
+            if(params.length > 0){
+                dispatch({
+                    type: 'set_btn_usefull',
+                    payload: false
+                })
+            }else{
+                dispatch({
+                    type: 'set_btn_usefull',
+                    payload: true
+                })
+            }
+            dispatch({
+                type: 'set_select_row_keys',
+                payload:{
+                    selectRowKeys: params
+                }
+            })
+        },
         getWarningMessage(){
             dispatch({
                 type: 'get_warning_message_data'
@@ -114,7 +170,17 @@ const mapDispatchToProps = (dispatch, props) => {
                 type: 'get_data_statics_data'
             })
         },
-    onTableChange({current, pageSize}){
+        onTableChange({current, pageSize}){
+            dispatch({
+                type: 'set_select_row_keys',
+                payload:{
+                    selectRowKeys: []
+                }
+            })
+            dispatch({
+                type: 'set_btn_usefull',
+                payload: true
+            })
             dispatch({
                 type: 'get_warning_message_data',
                 payload:{

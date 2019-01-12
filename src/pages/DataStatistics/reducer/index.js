@@ -11,9 +11,21 @@ const initalState = {
     },
     deptTongjiInfo:{},
     loading: false,
+    selectedRowKeys: [],
+    isUsefull: true
 }
 export const dataStatistics = (state = initalState, action) => {
     switch (action.type) {
+        case 'set_btn_usefull': 
+            return{
+                ...state,
+                isUsefull: action.payload
+            }
+        case 'set_select_row_keys': 
+            return{
+                ...state,
+                selectedRowKeys: action.payload.selectRowKeys
+            }
         case 'loading_data_statics': 
             return{
                 ...state,

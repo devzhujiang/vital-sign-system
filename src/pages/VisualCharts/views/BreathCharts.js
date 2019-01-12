@@ -10,7 +10,7 @@ export default class BreathCharts extends Component {
                 breathData
             } = this.props.visualCharts
             __.map(breathData.datas, (item) => {
-                item.time = moment(item.timeStamp).format('mm:ss')
+                item.time = moment(item.timeStamp).format('hh:mm:ss')
             })
             return {
                 title: {

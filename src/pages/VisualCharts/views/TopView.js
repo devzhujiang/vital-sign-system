@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
-import { Row, Col, Avatar, Icon } from 'antd'
+import { Row, Col, Icon } from 'antd'
 import qs from 'qs'
 import ModalForm from './ModalForm'
 class TopView extends Component {
@@ -23,9 +23,7 @@ class TopView extends Component {
         return (
             <React.Fragment>
                 <Row className="charts_top">
-                    <Col className="avatar" span={3}>
-                        <Avatar style={{ backgroundColor: '#52c41a', fontSize: 28 }} icon="user" />
-                    </Col>
+                    <Col className="avatar" span={1}></Col>
                     {
                         JSON.stringify(hospitalInfo) === '{}' ? '' :
                         (

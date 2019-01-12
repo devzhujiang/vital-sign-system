@@ -10,7 +10,7 @@ export default class HeartCharts extends Component {
                 heartData
             } = this.props.visualCharts
             __.map(heartData.datas, (item) => {
-                item.time = moment(item.timeStamp).format('mm:ss')
+                item.time = moment(item.timeStamp).format('hh:mm:ss')
             })
             return {
                 title: {

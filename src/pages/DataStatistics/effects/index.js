@@ -61,7 +61,51 @@ function * GetDataStaticsMessage(){
         })
     }
 }
+//处理消息
+function * BatchProcessMessageServices(argus){
+    const { selectedRowKeys } = yield select((state) => state.dataStatistics)
+    let _ids = []
+    if(argus.payload.id === 'batch'){
+        _ids = selectedRowKeys
+        
+    }else{
+        _ids = [argus.payload.id]
+    }
+    console.log(_ids)
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-warning-msg/msgProcess',
+        json:{
+            ids: _ids
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        yield put({
+            type: 'set_btn_usefull',
+            payload: true
+        })
+        yield put({
+            type: 'set_select_row_keys',
+            payload:{
+                selectRowKeys: []
+            }
+        })
+        yield put({
+            type: 'get_warning_message_data',
+        })
+        notification.success({
+            message: '处理成功'
+        })
+    }else{
+        notification.error({
+            message: '系统错误'
+        })
+    }
+}
 export function* dataStatistics() {
     yield takeEvery('get_warning_message_data', GetWarningMessageData)
     yield takeEvery('get_data_statics_data', GetDataStaticsMessage)
+    yield takeEvery('batch_process_message_services', BatchProcessMessageServices)
 }
