@@ -204,6 +204,27 @@ function * TestDoubleSelect(argus){
                 data: data.data.rooms
             }
         })
+        yield put({
+            type: 'save_rooms_info_to_store',
+            payload:{
+                data: data.data.rooms,
+            }
+        })
+
+        const firstOptions = __.map(data.data.rooms, (item, index) =>{
+            return{
+                value: item.id,
+                label: item.sn,
+                isLeaf: false
+            }
+        })
+
+        yield put({
+            type: 'save_sick_rooms_for_select',
+            payload:{
+                data: firstOptions,
+            }
+        })
     }else{
         notification.warning({
             message: '系统异常'
@@ -244,26 +265,26 @@ function * GetDepartmentSickRoomServices(){
         }
     })
     if(data && data.code === '0'){
-        const firstOptions = __.map(data.data.rooms, (item, index) =>{
-            return{
-                value: item.id,
-                label: item.sn,
-                isLeaf: false
-            }
-        })
-        yield put({
-            type: 'save_sick_rooms_for_select',
-            payload:{
-                data: firstOptions,
-            }
-        })
+        // const firstOptions = __.map(data.data.rooms, (item, index) =>{
+        //     return{
+        //         value: item.id,
+        //         label: item.sn,
+        //         isLeaf: false
+        //     }
+        // })
+        // yield put({
+        //     type: 'save_sick_rooms_for_select',
+        //     payload:{
+        //         data: firstOptions,
+        //     }
+        // })
 
-        yield put({
-            type: 'save_rooms_info_to_store',
-            payload:{
-                data: data.data.rooms,
-            }
-        })
+        // yield put({
+        //     type: 'save_rooms_info_to_store',
+        //     payload:{
+        //         data: data.data.rooms,
+        //     }
+        // })
         yield put({
             type: 'save_third_data_to_store',
             payload:{
