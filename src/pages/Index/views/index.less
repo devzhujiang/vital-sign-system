@@ -10,8 +10,8 @@
 }
 .banner-title{
     width: 100%;
-    font-size: 14px;
-    color: #333;
+    font-size: 18px;
+    color: #6C7080;
     line-height: 30px;
 }
 .banner-content{
@@ -19,7 +19,9 @@
     justify-content: space-around;
     align-items: center;
     .icon-num{
-        font-size: 26px;
+        font-size: 40px;
+        color: #24282E;
+        font-weight: 200;
     }
     .icon-img{
         width: 50px;
@@ -27,7 +29,7 @@
 }
 .top-right-banner{
     .ant-card-body{
-        padding: 10px;
+        padding: 0 10px;
     }
     height: 100px;
 }
@@ -42,12 +44,16 @@
         position: relative;
         .item-num {
             text-align: center;
-            font-size: 18px;
+            font-size: 28px;
             margin-bottom: 12px;
+            color: #24282E;
+            font-weight: 200;
         }
         .item-title {
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
+            color: #949BAD;
+            font-weight: 200;
         }
         .border-left{
             width: 1px;
@@ -67,8 +73,8 @@
     text-align: center;
 }
 .column-title{
-    font-size: 18px;
-    color: #000;
+    font-size: 24px;
+    color: #24282E;
     height: 30px;
     width: 100%;
     margin-bottom: 0;
@@ -80,7 +86,8 @@
     flex-wrap: wrap;
 }
 .patient-card{
-    width: 200px;
+    width: 212px;
+    height: 192px;
     display: inline-block;
     margin: 5px;
     margin-top: 10px;
@@ -101,24 +108,29 @@
 }
 .personBeds{
     align-self: center;
+    .isInBedIcon{
+        width: 30px;
+        height: 30px;
+        border-radius: 0;
+    }
 }
 .patientBeds{
-    font-size: 16px;
-    color: #000;
-    
+    font-size: 18px;
+    color:#24282E;
 }
 .patientName{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    color: #000;
+    color:#6C7080;
 }
 .patienTAge{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    color: #000;
+    color:#6C7080;
     padding-left: 6px;
 }
 .cardCont{
+    margin: 0 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -131,19 +143,21 @@
             text-align: center;
         }
         .count{
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 400;
-            color: #000;
+            color: #222;
         }
         .name{
             font-size: 12px;
-            color: #333;
+            color: #6C7080 ;
+            margin-top: 6px;
         }
     }
 }
 .cardBottom{
     text-align: right;
     padding: 6px 10px;
+    margin-top: 6px;
     .icon-set{
         cursor: pointer;
         font-size: 18px;

@@ -111,7 +111,7 @@ class Main extends Component {
                         <Layout className="margin_left200">
                             <Header 
                                 id="components-layout-demo-custom-trigger" 
-                                style={{ background: '#128875', padding: 0 }}
+                                style={{ background: '#128875', padding: 0, position: 'fixed', top: 0, right: 0, width: 'calc(100% - 200px)', zIndex: 99 }}
                             >
                                 <Row>
                                     <Col span={12}>
@@ -149,7 +149,7 @@ class Main extends Component {
                                     </Col>
                                 </Row>
                             </Header>
-                            <Content style={{ margin: '24px 16px 0', overflow: 'initial', paddingBottom: 50 }}>
+                            <Content style={{ margin: '24px 16px 0', overflow: 'initial', paddingBottom: 50, paddingTop: 60 }}>
                                 {this.props.children}
                             </Content>
                         </Layout>

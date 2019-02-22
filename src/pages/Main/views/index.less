@@ -42,11 +42,22 @@
   .margin_left200{
       margin-left: 200px;
   }
-.rightMenu{
+  .rightMenu{
     float: right;
     background: transparent !important;
     margin-top: 10px;
     border: none;
+    color: #fff !important;
+}
+.ant-menu-submenu > .ant-menu {
+    background-color: #fff;
+    z-index: 999;
+    position: relative;
+}
+.ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-submenu-selected{
     color: #fff;
-
+    border-bottom: 2px solid #fff !important;
+    .ant-menu-submenu-title {
+        color: #fff;
+    }
 }

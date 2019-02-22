@@ -38,7 +38,7 @@ export default class NoFocusPatientCard extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="personBeds">
-                                                            <Avatar src={require('../../../images/icon-is-bed.png')} />
+                                                            <Avatar className="isInBedIcon" src={require('../../../images/new-icon/in-bed-black.png')} />
                                                         </div>
                                                     </div>
                                                     <div className="cardCont">

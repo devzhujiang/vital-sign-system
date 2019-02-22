@@ -187,7 +187,6 @@ function * AddDevicesToBeds(argus){
 
 //新增
 function * TestDoubleSelect(argus){
-    console.group(argus)
     const data = yield call(requestServices.fetch,{
         resource: '/api/vital/t-vital-sickroom/findAllRoomByDeptId',
         params: {
