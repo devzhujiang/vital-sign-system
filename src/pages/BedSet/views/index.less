@@ -1,6 +1,6 @@
 
 .column-title{
-    font-size: 18px;
+    font-size: 28px;
     color: #000;
     height: 30px;
     width: 100%;
@@ -28,7 +28,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     .ant-card-head{
-        background: #e8e8e8;
+        background: #fff;
+        .ant-btn{
+            box-shadow: none;
+            color: #329E82;
+            font-size: 18px;
+            border:none;
+        }
     }
     .bedCardCont{
         padding: 5px 0;
@@ -41,6 +47,44 @@
             .ftSpe{
                 font-size: 16px;
             }
+        }
+    }
+    .itemCardCommonStyle{
+        display: inline-block;
+        width: 110px;
+        background: #F4F5F6;
+        height: 150px;
+        margin: 0 10px 10px 0;
+        vertical-align: top;
+        .ant-card-head{
+            background: #F4F5F6;
+            padding: 0;
+            text-align: center;
+        }
+        .ant-card-head-title{
+            padding: 8px 0;
+            font-weight: 400;
+            font-size: 16px;
+            color: #222;
+        }
+    }
+    .itemCardBlueStyle{
+        display: inline-block;
+        width: 110px;
+        background: #329E82;
+        height: 150px;
+        margin: 0 10px 10px 0;
+        vertical-align: top;
+        .ant-card-head{
+            background: #329E82;
+            padding: 0;
+            text-align: center;
+        }
+        .ant-card-head-title{
+            padding: 8px 0;
+            font-weight: 400;
+            font-size: 16px;
+            color: #fff;
         }
     }
 }
@@ -77,14 +121,14 @@
     }
 }
 .introItem{
-    width: 178px;
+    width: 206px;
     height: 30px;
     line-height: 30px;
     display: inline-block;
     font-size: 12px;
 }
 .speWidth{
-    width: 240px;
+    width: 96px;
 }
 .changeWrap{
     display: inline-block;

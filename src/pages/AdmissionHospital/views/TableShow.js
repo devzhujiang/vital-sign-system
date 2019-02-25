@@ -9,13 +9,6 @@ class TableShow extends Component {
         this.props.getTableShowInfoInit()
     }
     columnsMaker = () => {
-        const {
-            props:{
-                admissionHospital:{
-                    sorter
-                }
-            }
-        } = this
         return [{
                 title: '床号',
                 dataIndex: 'sickbed.sn'
@@ -32,7 +25,8 @@ class TableShow extends Component {
                 title: '入院时间',
                 dataIndex: 'hospitalStay',
                 sorter: true,
-                sortOrder: sorter.columnKey === 'hospitalStay' && sorter.order,
+                defaultSortOrder: 'descend',
+                // sortOrder: sorter.columnKey === 'hospitalStay' && sorter.order,
                 render(text, record, index) {
                     return (
                         <span>{record.hospitalStay ? record.hospitalStay : '--'}</span>
@@ -41,6 +35,7 @@ class TableShow extends Component {
             }, {
                 title: '出院时间',
                 dataIndex: 'dischargeTime',
+                sorter: true,
                 render(text, record, index) {
                     return (
                         <span>{record.dischargeTime ? record.dischargeTime : '--'}</span>
@@ -106,6 +101,7 @@ const mapDispatchToProps = (dispatch, props) => {
             })
         },
         onTableChange({ current, pageSize }, filters, sorter) {
+            console.log(sorter)
             if (!_.isEmpty(sorter)) {
                 const sortInfo = {
                     columnKey: sorter.columnKey,

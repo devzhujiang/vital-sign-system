@@ -25,10 +25,18 @@ const initalState = {
     devicesFirstData: [],
     devicesSecondData: [],
     devicesFourData: [],
-    
+    deviceModal:{},
+    deviceItem: {}
 }
 export const bedSet = (state = initalState, action) => {
     switch (action.type) {
+        case 'set_sevice_modal_visible': 
+            return{
+                ...state,
+                deviceModal: {
+                    [action.payload.data.id]: true
+                }
+            }
         case 'save_first_data_to_store': 
             return{
                 ...state,

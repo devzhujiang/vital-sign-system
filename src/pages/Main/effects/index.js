@@ -36,6 +36,28 @@ export function* getDepartmentServices() {
             message: '系统错误'
         })
     }
+    //获取所有的住院中的病人信息
+    const paitentsData = yield call(requestServices.fetch,{
+        resource: '/api/vital/t-vital-hospitalized/findAllHospitalInformation',
+        params:{
+            deptId: sessionStorage.getItem('deptId')
+        },
+        headers:{
+            token: sessionStorage.token
+        }
+    })
+    if(paitentsData && paitentsData.code === '0'){
+        yield put({
+            type: 'global_paitents_lists',
+            payload:{
+                data: paitentsData.data.list
+            }
+        })
+    }else{
+        notification.error({
+            message: '系统错误'
+        })
+    }
 }
 
 export function* loginOutServices() {
@@ -90,9 +112,9 @@ export function* getDeptExceptInfoServices(argus) {
                 // })
             }
             client.onMessageArrived = (message) =>{
-                console.log(message)
+                // console.log(message)
                 let mqttMessageToJson = JSON.parse(message.payloadString)
-                console.log(mqttMessageToJson)
+                // console.log(mqttMessageToJson)
                 if(mqttMessageToJson.type === 1){
                     //病人MQTT信息
                     let _data = window.store.getState().main.indexCardInfo

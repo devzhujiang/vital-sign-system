@@ -9,10 +9,16 @@ const initalState = {
     mqttMessage: {},
     navList: [],
     warningMqttMsg:[],
-    sickPeopleInfoMain: []
+    sickPeopleInfoMain: [],
+    globalPaitentsLists: [],
 }
 export const main = (state = initalState, action) => {
     switch (action.type) {
+        case 'global_paitents_lists':
+            return {
+                ...state,
+                globalPaitentsLists: action.payload.data
+            }
         case 'sick_people_info_main':
             return {
                 ...state,

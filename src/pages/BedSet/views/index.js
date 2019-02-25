@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
 import __ from 'lodash'
+// import { Row, notification, Card, Button } from 'antd'
 import { Row, Col, Button, Modal, Input, Select,notification, Card } from 'antd'
 import SearchForm from './SearchForm'
-import SearchFormDevices from './SearchFormDevices'
-import DoubleSelect from '../../../components/DoubleSelect'
+import DeviceOperator from './DeviceOperator'
+// import SearchFormDevices from './SearchFormDevices'
+// import DoubleSelect from '../../../components/DoubleSelect'
 const Option = Select.Option
 class BedSet extends Component {
     componentDidMount() {
@@ -14,11 +16,12 @@ class BedSet extends Component {
         // this.props.getBedsForExchange()
     }
     render() {
+        
         return (
             <React.Fragment>
                 <Row className="bedSet">
                     <Col span={10}>
-                        <p className="column-title">病房床位初始化</p>
+                        <p className="column-title">病床一览</p>
                     </Col>
                     <Col className="tr" span={14}>
                         <Button onClick={() =>{this.props._showHideOpt({roomVisible: true})}} className="btn_bed_set" type="primary">添加病房</Button>
@@ -59,7 +62,7 @@ class BedSet extends Component {
                                 </div>
                             </React.Fragment>
                         </Modal>
-                        <Button onClick={() =>{this.props._showHideOpt({deviceVisible: true})}} className="btn_bed_set" type="primary">添加设备</Button>
+                        {/* <Button onClick={() =>{this.props._showHideOpt({deviceVisible: true})}} className="btn_bed_set" type="primary">添加设备</Button>
                         <Modal
                             title="添加设备"
                             maskClosable={false}
@@ -85,7 +88,7 @@ class BedSet extends Component {
                                     </Select>
                                 </div>
                             </React.Fragment>
-                        </Modal>
+                        </Modal> */}
                     </Col>
                 </Row>
                 <Row className="bedCard mt20">
@@ -94,16 +97,70 @@ class BedSet extends Component {
                         __.map(this.props.bedSet.rooms, (item, index) =>{
                             return(
                                 <Card
-                                    title={item.sn}
                                     key={index}
-                                    style={{ width: 200, margin: '5px' }}
+                                    title={item.sn + '病房'}
+                                    extra={(<Button onClick={this.props.onDeviceBtnClick.bind(this, item)}>设备处理</Button>)}
+                                    style={{ minWidth: 300, margin: 3 }}
+                                    headStyle={{fontWeight: 400, fontSize: 24, color: '#222'}}
                                 >
-                                    <div className="bedCardCont"><span className="bedName">床位数</span><span className="bedCount">{item.bedCount} <span className="ftSpe">张</span></span></div>
-                                    <div className="bedCardCont"><span className="bedName">设备数</span><span className="bedCount">{item.deviceCount} <span className="ftSpe">张</span></span></div>
+                                    <React.Fragment>
+                                        {
+                                            item.beds.length === 0 ? (
+                                                <div>该病房暂无病床</div>
+                                            ) :
+                                            __.map(item.beds, (list, idx) =>{
+                                                return(
+                                                    <Card 
+                                                        key={idx}
+                                                        className={list.status === 0 ? 'itemCardCommonStyle' : 'itemCardBlueStyle'}
+                                                        title={list.sn  + '号床'}
+                                                        bordered={false}
+                                                        headStyle={{height: 38, minHeight: 38}}
+                                                        bodyStyle={{marginTop: 36, padding: '24px 0', textAlign: 'center'}}
+                                                    >
+                                                        {
+                                                            list.status === 0 ? (
+                                                                <div>
+                                                                    {
+                                                                        list.hasDevice ? (
+                                                                            <React.Fragment>
+                                                                                <div style={{ fontSize: 12, color: '#222'}}>空床</div>
+                                                                                <div style={{ fontSize: 12, color: '#222'}}>有设备</div>
+                                                                            </React.Fragment>
+                                                                        ): (
+                                                                            <React.Fragment>
+                                                                                <div style={{ fontSize: 12, color: '#222'}}>空床</div>
+                                                                                <div style={{ fontSize: 12, color: '#222'}}>没有设备</div>
+                                                                            </React.Fragment>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                            ) : (
+                                                                <div>
+                                                                    {
+                                                                        list.hasDevice ? (
+                                                                            <React.Fragment>
+                                                                                <p style={{ fontSize: 12, color: '#fff'}}>设备使用中</p>
+                                                                            </React.Fragment>
+                                                                        ): (
+                                                                            <React.Fragment>
+                                                                                <p style={{ fontSize: 12, color: '#fff'}}>没有设备</p>
+                                                                            </React.Fragment>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </Card>
+                                                )
+                                            })
+                                        }
+                                    </React.Fragment>
                                 </Card>
                             )
                         })
                     }
+                    <DeviceOperator {...this.props} />
                 </Row>
                 <Row>
                     <React.Fragment>
@@ -114,12 +171,6 @@ class BedSet extends Component {
                                 <SearchForm {...this.props} />
                             </div>
                         </Row>
-                        <Row className="mt20 exchangeBg">
-                            <div className="paitentAreaTitle">设备换床</div>
-                            <div className="paitentFormList">
-                                <SearchFormDevices {...this.props} />
-                            </div>
-                        </Row>
                     </React.Fragment>
                 </Row>
             </React.Fragment>
@@ -128,11 +179,21 @@ class BedSet extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        bedSet: state.bedSet
+        bedSet: state.bedSet,
+        main: state.main
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        onDeviceBtnClick(obj){
+            console.log(obj)
+            dispatch({
+                type: 'set_sevice_modal_visible',
+                payload:{
+                    data: obj
+                }
+            })
+        },
         onChangeDevicesSelect(value){
             console.log(value)
             dispatch({

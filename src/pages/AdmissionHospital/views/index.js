@@ -16,7 +16,7 @@ class AdmissionHospital extends Component {
                 deptTongjiInfo
             }
          } = this.props
-         console.log(deptTongjiInfo)
+        //  console.log(deptTongjiInfo)
         return (
             <React.Fragment>
                 <div className="admissionHospital">
