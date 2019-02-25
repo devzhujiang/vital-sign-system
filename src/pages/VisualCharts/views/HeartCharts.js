@@ -40,13 +40,13 @@ export default class HeartCharts extends Component {
                 calculable : true,
                 xAxis: {
                     type: 'category',
-                    data: __.map(heartData.datas, (item) => item.time),
+                    data: __.map(heartData.datas, (item) => item.timestamp),
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: __.map(heartData.datas, (item) => item.heartbeat),
+                    data: __.map(heartData.datas, (item) => item.heart),
                     type: 'line'
                 }]
             }
