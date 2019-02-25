@@ -17,7 +17,6 @@ const initalState = {
     secondCascaderData: [],
     devicesAvaInfo: [],
     sickRoomForSelect: [],
-
     paitentsFirstData: [],
     paitentsSecondData: [],
     paitentsThirdData: [],
@@ -25,17 +24,22 @@ const initalState = {
     devicesFirstData: [],
     devicesSecondData: [],
     devicesFourData: [],
-    deviceModal:{},
-    deviceItem: {}
+    deviceModal: false,
+    deviceItem: {},
+    bedsList: []
 }
 export const bedSet = (state = initalState, action) => {
     switch (action.type) {
+        case 'close_device_modal': 
+            return{
+                ...state,
+                deviceModal: false
+            }
         case 'set_sevice_modal_visible': 
             return{
                 ...state,
-                deviceModal: {
-                    [action.payload.data.id]: true
-                }
+                deviceModal: true,
+                bedsList: action.payload.data.beds
             }
         case 'save_first_data_to_store': 
             return{

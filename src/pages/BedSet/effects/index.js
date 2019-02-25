@@ -107,7 +107,8 @@ function * GetDepartmentInfosServices(){
         resource: '/api/vital/t-vital-device/devices',
         params:{
             departmentId: sessionStorage.getItem('deptId'),
-            sickbedId: 0
+            // sickbedId: 1,
+            // sickroomId: 1
         },
         headers:{
             authorization: sessionStorage.getItem('token')
@@ -170,17 +171,37 @@ function * AddDevicesToBeds(argus){
                 reOpenMqtt: true
             }
         })
+    }else{
+        notification.warning({
+            message: data.msg || '系统异常'
+        })
+    }
+}
+
+//解除设备
+function * RelieveDevicesToBeds(argus){
+    const data = yield call(requestServices.create,{
+        resource: '/api/vital/t-vital-sickbed/unBindDevice',
+        data: {
+            ...argus.payload
+        },
+        headers:{
+            authorization: sessionStorage.getItem('token')
+        }
+    })
+    if(data && data.code === '0'){
+        notification.success({
+            message: '设备解除成功'
+        })
         yield put({
-            type: 'show_hide_opt',
-            payload:{
-                data:{
-                    deviceVisible: false
-                }
+            type: 'get_dept_except_info_serveces',
+            payload: {
+                reOpenMqtt: true
             }
         })
     }else{
         notification.warning({
-            message: '系统异常'
+            message: data.msg || '系统异常'
         })
     }
 }
@@ -377,6 +398,7 @@ export function* bedSet() {
     yield takeEvery('get_department_info_services', GetDepartmentInfosServices)
     yield takeEvery('exchange_sick_bed', ExchangeDepartmentBedssServices)
     yield takeEvery('add_devices_to_beds', AddDevicesToBeds)
+    yield takeEvery('relieve_devices_to_beds', RelieveDevicesToBeds)
 
     // yield takeEvery('get_depart_sick_room_for_select', GetDepartmentSickRoomServices)
     // yield takeEvery('get_all_beds_for_exchange', GetAllBedsToExchangeServices)
