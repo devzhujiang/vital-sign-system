@@ -40,13 +40,13 @@ export default class BodyMoveCharts extends Component {
                 calculable : true,
                 xAxis: {
                     type: 'category',
-                    data: __.map(bodyMoveData.datas, (item) => item.time),
+                    data: __.map(bodyMoveData.datas, (item) => item.timestamp),
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: __.map(bodyMoveData.datas, (item) => item.body_movement),
+                    data: __.map(bodyMoveData.datas, (item) => item.bodymotion),
                     type: 'line'
                 }]
             }

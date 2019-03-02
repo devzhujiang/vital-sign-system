@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
-import { Card, Row, Col } from 'antd'
+import { Card, Row, Col} from 'antd'
 import idCard from 'idcard'
 import { Link } from 'react-router-dom'
 class SearchPaitents extends Component {

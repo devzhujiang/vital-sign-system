@@ -11,12 +11,12 @@ const mapDispatchToProps = (dispatch, props) => {
             e.preventDefault()
             this.props.form.validateFields((err, values) =>{
                 if(!err){
-                    console.log(values.paitent_first_option.split('-')[0])
+                    console.log(values.paitent_first_option.split('$')[0])
                     console.log(values.paitent_four_option)
                     dispatch({
                         type: 'paitent_exchange_services',
                         payload:{
-                            sourceId: values.paitent_first_option.split('-')[0],
+                            sourceId: values.paitent_first_option.split('$')[0],
                             targetId: values.paitent_four_option,
                         }
                     })
@@ -89,7 +89,7 @@ export default connect(null, mapDispatchToProps) (Form.create() (class SearchFro
                                 {
                                     globalPaitentsLists.map((item) =>{
                                         return(
-                                            <Option key={item.id} value={item.bedId + '-' + item.name}>{item.name + '(' + item.bedSn + ')'}</Option>
+                                            <Option key={item.id} value={item.bedId + '$' + item.name}>{item.name + '(' + item.bedSn + ')'}</Option>
                                         )
                                     })
                                 }

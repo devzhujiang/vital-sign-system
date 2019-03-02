@@ -88,7 +88,7 @@ function * LeaveHospitalServices(argus){
         resource: '/api/vital/t-vital-hospitalized/searchhos',
         data: {
             deptId: sessionStorage.getItem('deptId'),
-            key: argus.payload.sick.name
+            key: argus.payload.sick.name.split('$')[0]
         },
         headers:{
             authorization: sessionStorage.getItem('token')

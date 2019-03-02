@@ -25,12 +25,12 @@ import './index.less'
                         <div className="item-detail">
                             <p className="item-num w100">{tongjiInfo.bedOutCount}</p>
                             <p className="item-title w100">离床</p>
-                            <span className="border-left"></span>
+                            {/* <span className="border-left"></span> */}
                         </div>
-                        <div className="item-detail">
+                        {/* <div className="item-detail">
                             <p className="item-num w100">0</p>
                             <p className="item-title w100">故障</p>
-                        </div>
+                        </div> */}
                     </div>
                 </Card>
             </React.Fragment>

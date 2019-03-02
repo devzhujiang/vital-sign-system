@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './index.less'
-import {  Modal, Form, Input, Button, Card, Row, Col } from 'antd'
+import {  Modal, Form, Button, Card, Row, Col, Select } from 'antd'
 const FormItem = Form.Item
+const Option = Select.Option
 class LeaveHospital extends Component {
     render() {
         const {
@@ -14,7 +15,10 @@ class LeaveHospital extends Component {
             admissionHospital:{
                 leave_people_info
             },
-            sickPeopleLeave
+            sickPeopleLeave,
+            main:{
+                globalPaitentsLists
+            }
         } = this.props
         return (
             <React.Fragment>
@@ -36,7 +40,19 @@ class LeaveHospital extends Component {
                                             message: '请输入病人病床号/住院号',
                                         }],
                                     })(
-                                        <Input style={{ width: 300 }} placeholder="请输入病人病床号/住院号" />
+                                        <Select 
+                                            placeholder="请选择" 
+                                            showSearch
+                                            style={{ width: 300 }}
+                                        >
+                                            {
+                                                globalPaitentsLists.map((item) =>{
+                                                    return(
+                                                        <Option key={item.id} value={item.hospitalNumber + '$' + item.name}>{item.name + '(' + item.bedSn + ')'}</Option>
+                                                    )
+                                                })
+                                            }
+                                        </Select>
                                     )}
                                 </FormItem>
                                 <FormItem>
@@ -83,7 +99,8 @@ class LeaveHospital extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        admissionHospital: state.admissionHospital
+        admissionHospital: state.admissionHospital,
+        main: state.main
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
