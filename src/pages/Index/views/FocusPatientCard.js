@@ -28,7 +28,7 @@ export default class FocusPatientCard extends Component {
                                                 className="patient-card"
                                             >
                                                 <Link  to={`/visualCharts?id=${item.patient.id}&planId=${item.planId}&hospitalId=${item.id}`}>
-                                                    <div className="cardTopSpe">
+                                                    <div className={ item.device.timeStamp ? (((!__.inRange(item.device.heartbeat, 60, 80)) || (!__.inRange(item.device.breath, 12, 20))) ? 'cardTopGreen' : 'cardTopSpe') : 'cardTopSpe'   }>
                                                         <div className="personInfo">
                                                             <div className="patientBeds">{item.sickbed.sn}</div>
                                                             <div>

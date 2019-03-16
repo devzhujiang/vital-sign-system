@@ -11,7 +11,7 @@ export default class BodyMoveCharts extends Component {
                 bodyMoveData
             } = this.props.visualCharts
             __.map(bodyMoveData.datas, (item) => {
-                item.time = moment(item.timeStamp).format('hh:mm:ss')
+                item.time = moment(item.timestamp).format('hh:mm:ss')
             })
             return {
                 title: {
@@ -40,7 +40,7 @@ export default class BodyMoveCharts extends Component {
                 calculable : true,
                 xAxis: {
                     type: 'category',
-                    data: __.map(bodyMoveData.datas, (item) => item.timestamp),
+                    data: __.map(bodyMoveData.datas, (item) => item.time),
                 },
                 yAxis: {
                     type: 'value'

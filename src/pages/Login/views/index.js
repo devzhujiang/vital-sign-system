@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Card } from 'antd'
 import './new.less'
 
 const FormItem = Form.Item
@@ -25,56 +25,60 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className="nav">
-                        <Form>
-                             <div className="login_title">登录</div>
-                            <FormItem 
-                                label="用户名"
-                                labelCol={{ span: 5 }}
-                                wrapperCol={{ span: 12 }}
-                                colon={false}
-                            >
-                                {getFieldDecorator('username', {
-                                    rules: [{
-                                        required: true,
-                                        message: '用户名必须填写'
-                                    }]
-                                })(
-                                    <Input className='input-style' placeholder="请输入用户名" />
-                                )}
-                            </FormItem>
-                            <FormItem 
-                                label="密码"
-                                labelCol={{ span: 5 }}
-                                wrapperCol={{ span: 12 }}
-                                colon={false}
-                            >
-                                {getFieldDecorator('password', {
-                                    rules: [{
-                                        required: true,
-                                        message: '密码必须填写'
-                                    }],
-                                })(
-                                    <Input className='input-style' type="password" placeholder="请输入密码" />
-                                )}
-                            </FormItem>
-                            <FormItem>
-                                <Button
-                                    className='submit-btn'
-                                    style={{
-                                        width: '100%',
-                                        height: 43,
-                                        border: 'none',
-                                        outline: 'none',
-                                        marginTop: 30
-                                    }}
-                                    type="primary"
-                                    htmlType="submit"
-                                    onClick={this.props.onSubmitLogin.bind(this)}
+                        <Card
+                            title="登录"
+                            headStyle={{ background: '#F4F4F5', padding: 0, textAlign: 'center'}}
+                        >
+                            <Form>
+                                <FormItem 
+                                    label="用户名"
+                                    labelCol={{ span: 5 }}
+                                    wrapperCol={{ span: 12 }}
+                                    colon={false}
                                 >
-                                    立即登录
-                                </Button>
-                            </FormItem>
-                        </Form>
+                                    {getFieldDecorator('username', {
+                                        rules: [{
+                                            required: true,
+                                            message: '用户名必须填写'
+                                        }]
+                                    })(
+                                        <Input className='input-style' placeholder="请输入用户名" />
+                                    )}
+                                </FormItem>
+                                <FormItem 
+                                    label="密码"
+                                    labelCol={{ span: 5 }}
+                                    wrapperCol={{ span: 12 }}
+                                    colon={false}
+                                >
+                                    {getFieldDecorator('password', {
+                                        rules: [{
+                                            required: true,
+                                            message: '密码必须填写'
+                                        }],
+                                    })(
+                                        <Input className='input-style' type="password" placeholder="请输入密码" />
+                                    )}
+                                </FormItem>
+                                <FormItem>
+                                    <Button
+                                        className='submit-btn'
+                                        style={{
+                                            width: '100%',
+                                            height: 43,
+                                            border: 'none',
+                                            outline: 'none',
+                                            marginTop: 30
+                                        }}
+                                        type="primary"
+                                        htmlType="submit"
+                                        onClick={this.props.onSubmitLogin.bind(this)}
+                                    >
+                                        立即登录
+                                    </Button>
+                                </FormItem>
+                            </Form>
+                        </Card>
                     </div>
                 </div>
             </div>

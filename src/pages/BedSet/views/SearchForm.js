@@ -66,7 +66,7 @@ export default connect(null, mapDispatchToProps) (Form.create() (class SearchFro
             }
         } = this
         return(
-            <div>
+            <div style={{ marginBottom: '150px'}}>
                 <Row className="formIntro">
                     <Col className="introItem">病人姓名</Col>
                     <Col className="introItem speWidth"></Col>
