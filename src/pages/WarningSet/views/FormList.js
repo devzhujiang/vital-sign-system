@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Row, Form, Input, Button, Checkbox, Radio } from 'antd'
+import { Row, Form, Input, Button, Checkbox, Radio, Icon, Tooltip } from 'antd'
 import './index.less'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
@@ -126,6 +126,54 @@ class FormSearch extends Component {
                             label=""
                         >
                             <div>
+                                <span className="firseItem">&nbsp;</span>
+                                <span className="secondItem">呼吸暂停</span>
+                                <span className="thirdItem">
+                                    <FormItem>
+                                        {getFieldDecorator('name4_1', {
+                                            rules: [{
+                                                required: true,
+                                                message: '请输入呼吸暂停时间',
+                                            }],
+                                        })(
+                                            <Input style={{ width: '100px'}} placeholder="时间" />
+                                        )}
+                                        <span className="ant-form-text"> 秒(超过该呼吸暂停时长时，立即报警)</span>
+                                    </FormItem>
+                                </span>
+                            </div>
+                        </FormItem>
+                            
+                        <FormItem
+                        {...formItemLayout}
+                            label=""
+                        >
+                            <div>
+                                <span className="firseItem">&nbsp;</span>
+                                <span className="secondItem">心率暂停</span>
+                                <span className="thirdItem">
+                                    <FormItem>
+                                        {getFieldDecorator('name6_1', {
+                                            rules: [{
+                                                required: true,
+                                                message: '请输入心率暂停时间',
+                                            }],
+                                        })(
+                                            <Input style={{ width: '100px'}} placeholder="时间" />
+                                        )}
+                                        <span className="ant-form-text"> 秒(超过该心率暂停时长时，立即报警)</span>
+                                    </FormItem>
+                                </span>
+                            </div>
+                        </FormItem>
+
+                        <div style={{ border: '1px dashed #D6D8DD', width: '100%', height: '1px', marginBottom: '10px'}}></div>
+
+                        <FormItem
+                        {...formItemLayout}
+                            label=""
+                        >
+                            <div>
                             <span className="firseItem">
                                 <FormItem>
                                     {getFieldDecorator('name2_1')(
@@ -142,9 +190,9 @@ class FormSearch extends Component {
                                                 message: '请输入离床时间',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="离床时间" />
+                                            <Input style={{ width: '66px'}} type="number" placeholder="时间" />
                                         )}
-                                        <span className="ant-form-text"> 分钟（默认0分钟，立即报警）</span>
+                                        <span className="ant-form-text"> 分钟(勾选并超过该离床时间时，立即提示)</span>
                                     </FormItem>
                                 </span>
                             </div>
@@ -170,7 +218,7 @@ class FormSearch extends Component {
                                                 message: '请输入呼吸次数',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="呼吸次数" />
+                                            <Input style={{ width: '66px'}} type="number" placeholder="呼吸次数" />
                                         )}
                                         <span className="ant-form-text"> - </span>
                                     </FormItem>
@@ -183,35 +231,19 @@ class FormSearch extends Component {
                                                 message: '请输入呼吸次数',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="呼吸次数" />
+                                            <Input style={{ width: '66px'}} type="number" placeholder="呼吸次数" />
                                         )}
-                                        <span className="ant-form-text"> 次 / 分钟</span>
+                                        <React.Fragment>
+                                            <span className="ant-form-text"> 次 / 分钟</span>
+                                            <Tooltip placement="top" title='勾选并超出该区间时，立即提示'>
+                                                <Icon style={{color: '#128875'}} type="info-circle" />
+                                            </Tooltip>
+                                        </React.Fragment>
                                     </FormItem>
                                 </span>
                             </div>
                         </FormItem>
-                        <FormItem
-                        {...formItemLayout}
-                            label=""
-                        >
-                            <div>
-                                <span className="firseItem">&nbsp;</span>
-                                <span className="secondItem">呼吸暂停</span>
-                                <span className="thirdItem">
-                                    <FormItem>
-                                        {getFieldDecorator('name4_1', {
-                                            rules: [{
-                                                required: true,
-                                                message: '请输入呼吸暂停时间',
-                                            }],
-                                        })(
-                                            <Input className="inputStyle" placeholder="呼吸暂停时间" />
-                                        )}
-                                        <span className="ant-form-text"> 秒</span>
-                                    </FormItem>
-                                </span>
-                            </div>
-                        </FormItem>
+                        
                         <FormItem
                         {...formItemLayout}
                             label=""
@@ -233,7 +265,7 @@ class FormSearch extends Component {
                                                 message: '请输入心率',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="心率" />
+                                            <Input style={{ width: '66px'}} type="number" placeholder="心率" />
                                         )}
                                         <span className="ant-form-text"> - </span>
                                     </FormItem>
@@ -246,35 +278,19 @@ class FormSearch extends Component {
                                                 message: '请输入心率',
                                             }],
                                         })(
-                                            <Input style={{ width: '100px'}} type="number" className="inputStyle" placeholder="心率" />
+                                            <Input style={{ width: '66px'}} type="number" placeholder="心率" />
                                         )}
-                                        <span className="ant-form-text"> 次 / 分钟</span>
+                                        <React.Fragment>
+                                            <span className="ant-form-text"> 次 / 分钟</span>
+                                            <Tooltip placement="top" title='勾选并超出该区间时，立即提示'>
+                                                <Icon style={{color: '#128875'}} type="info-circle" />
+                                            </Tooltip>
+                                        </React.Fragment>
                                     </FormItem>
                                 </span>
                             </div>
                         </FormItem>
-                        <FormItem
-                        {...formItemLayout}
-                            label=""
-                        >
-                            <div>
-                                <span className="firseItem">&nbsp;</span>
-                                <span className="secondItem">心率暂停</span>
-                                <span className="thirdItem">
-                                    <FormItem>
-                                        {getFieldDecorator('name6_1', {
-                                            rules: [{
-                                                required: true,
-                                                message: '请输入心率暂停时间',
-                                            }],
-                                        })(
-                                            <Input className="inputStyle" placeholder="请输入心率暂停时间" />
-                                        )}
-                                        <span className="ant-form-text"> 秒</span>
-                                    </FormItem>
-                                </span>
-                            </div>
-                        </FormItem>
+                        
                         <FormItem
                         {...formItemLayout}
                             label=""
@@ -295,9 +311,14 @@ class FormSearch extends Component {
                                                 message: '请输入体动时间',
                                             }],
                                         })(
-                                            <Input className="inputStyle" placeholder="请输入体动时间" />
+                                            <Input style={{ width: '156px'}} placeholder="请输入体动时间" />
                                         )}
-                                        <span className="ant-form-text"> 分钟</span>
+                                        <React.Fragment>
+                                            <span className="ant-form-text"> 小时</span>
+                                            <Tooltip placement="top" title='身体未动超出该值时，立即提示'>
+                                                <Icon style={{color: '#128875'}} type="info-circle" />
+                                            </Tooltip>
+                                        </React.Fragment>
                                     </FormItem>
                                 </span>
                             </div>
@@ -322,13 +343,19 @@ class FormSearch extends Component {
                                                 message: '请输入睡眠时长',
                                             }],
                                         })(
-                                            <Input className="inputStyle" placeholder="请输入睡眠时长" />
+                                            <Input style={{ width: '156px'}} placeholder="请输入睡眠时长" />
                                         )}
-                                        <span className="ant-form-text"> 分钟</span>
+                                        <React.Fragment>
+                                            <span className="ant-form-text"> 小时</span>
+                                            <Tooltip placement="top" title='睡眠时长超出该值时，立即提示'>
+                                                <Icon style={{color: '#128875'}} type="info-circle" />
+                                            </Tooltip>
+                                        </React.Fragment>
                                     </FormItem>
                                 </span>
                             </div>
                         </FormItem>
+                        <div style={{ border: '1px dashed #D6D8DD', width: '100%', height: '1px', marginBottom: '10px'}}></div>
                         <FormItem
                         {...formItemLayout}
                             label=""

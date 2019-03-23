@@ -9,6 +9,7 @@ import { warningDetails } from '../pages/WarningDetails/reducer'
 import { dataStatistics } from '../pages/DataStatistics/reducer'
 import { visualCharts } from '../pages/VisualCharts/reducer'
 import { searchPaitents } from '../pages/SearchPaitents/reducer'
+import { message } from '../pages/Message/reducer'
 
 
 export default combineReducers({
@@ -22,4 +23,5 @@ export default combineReducers({
     dataStatistics,
     visualCharts,
     searchPaitents,
+    message
 })

@@ -94,6 +94,13 @@ const App = ({ store }) => {
                                         loading: Loading
                                     })}
                                 />
+                                <Route
+                                    path="/message"
+                                    component={Loadable({
+                                        loader: () => import("./pages/Message/views"),
+                                        loading: Loading
+                                    })}
+                                />
                             </div>
                         </Main>
                         <Route component={NotFound} />

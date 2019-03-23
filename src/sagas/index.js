@@ -9,6 +9,7 @@ import { warningDetails } from '../pages/WarningDetails/effects/index';
 import { dataStatistics } from '../pages/DataStatistics/effects'
 import { visualCharts } from '../pages/VisualCharts/effects'
 import { searchPaitents } from '../pages/SearchPaitents/effects'
+import { message } from '../pages/Message/effects'
 
 export default function* rootSaga() {
   yield all([
@@ -22,5 +23,6 @@ export default function* rootSaga() {
         dataStatistics(),
         visualCharts(),
         searchPaitents(),
+        message(),
     ])
 }

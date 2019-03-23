@@ -48,7 +48,12 @@ class DataStatistics extends Component {
             dataIndex: 'processTime',
             render(text, record, index){
                 return(
-                    <span>{record.processTime ? record.processTime : '暂无预警时间'}</span>
+                    record.status === 0 ? (
+                        <span>{record.gmtCreated ? record.gmtCreated : '暂无预警时间'}</span>
+                    ):(
+                        <span>{record.processTime ? record.processTime : '暂无处理时间'}</span>
+                    )
+                    
                 )
             }
         },{
