@@ -111,7 +111,6 @@ class Main extends Component {
                         <Layout className="margin_left200">
                             <Header 
                                 id="components-layout-demo-custom-trigger" 
-                                style={{ background: '#128875', padding: 0, position: 'fixed', top: 0, right: 0, width: 'calc(100% - 200px)', zIndex: 99 }}
                             >
                                 <Row>
                                     <Col span={12}>
