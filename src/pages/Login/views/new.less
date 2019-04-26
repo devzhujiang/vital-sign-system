@@ -66,16 +66,33 @@
     background: transparent;
     border: none;
     outline: none;
+    box-shadow: none;
 }
+.input-style:focus{
+    border: none !important;
+    outline: 0 !important;
+    box-shadow: none;
+}
+.has-error .ant-input:not([disabled]):hover {
+    border: none;
+    outline: 0 !important;
+    box-shadow: none;
+}
+.has-error .ant-input, .has-error .ant-input:hover {
+    border: none;
+    outline: 0 !important;
+    box-shadow: none;
+}
+
 .submit-btn{
-    background-color:rgba(0,0,0,0.1);
+    background-color: #0E7262;
     >span{
       color: #fff;
     }
-}
-.submit-btn:hover{
-    background-color:rgba(0,0,0,0.5);
-}
+  }
+  .submit-btn:hover{
+    background-color:#128875;
+  }
 .bodyWrap .ant-form-item-label{
     text-align: left;
 }
@@ -89,4 +106,7 @@
 }
 .login_title{
     margin-bottom: 40px;
+}
+.ant-form-explain{
+    padding-left: 11px;
 }

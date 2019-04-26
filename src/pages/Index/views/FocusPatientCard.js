@@ -58,7 +58,7 @@ export default class FocusPatientCard extends Component {
                                                     </div>
                                                 </Link>
                                                 <div className="cardBottom">
-                                                    <Icon onClick={focusPaitentServices.bind(this, item.id)} style={{ marginRight: 6}} className="icon-set-focus"  type="heart" theme="filled" /> 
+                                                    <Icon onClick={focusPaitentServices.bind(this, item.id)} style={{ marginRight: 10}} className="icon-set-focus"  type="heart" theme="filled" /> 
                                                     <Icon onClick={openPaitentWarningPlan.bind(this, item.id, item.planId)} className="icon-set" type="setting" theme="outlined" /> 
                                                 </div>
                                             </Card>
