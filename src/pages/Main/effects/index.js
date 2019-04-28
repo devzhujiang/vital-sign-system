@@ -19,7 +19,7 @@ export function* getDepartmentServices() {
             // title: '导航1',
             title: data.data.depts[0].departmentName,
             url: '/index',
-            icon: 'icon-keshi',
+            icon: 'icon-keshix1',
             selectIcon: 'right',
         })
         yield put({

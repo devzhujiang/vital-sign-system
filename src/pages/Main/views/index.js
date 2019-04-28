@@ -7,6 +7,7 @@ import { navList as navOrigin } from '../const/index'
 import _ from 'lodash'
 import { hashPathname } from '../../../utils/index'
 import createHistory from 'history/createHashHistory'
+import Helmet from 'react-helmet'
 const history = createHistory()
 const { Header, Content, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -51,6 +52,10 @@ class Main extends Component {
         })
         return (
             <div>
+                <Helmet>
+                    <link href="//at.alicdn.com/t/font_922218_9rd20riqfgc.css" />
+                    <script src="//at.alicdn.com/t/font_922218_9rd20riqfgc.js" />   
+                </Helmet>
                 {
                     this.props.location.pathname === '/login' ? '' :
                     <Layout id="self_theme">
@@ -78,7 +83,7 @@ class Main extends Component {
                                                 <Menu.Item key={item.key}>
                                                     <Link to={{
                                                         pathname: item.url
-                                                    }}>{item.icon && <IconFont type={item.icon} style={{ fontSize: 20}} />}<span>{item.title}</span> <Icon className="selectIcon" type={item.selectIcon} theme="outlined" /></Link>
+                                                    }}>{item.icon && <IconFont type={item.icon} style={{ fontSize: 20 }} />}<span>{item.title}</span> <Icon className="selectIcon" type={item.selectIcon} theme="outlined" /></Link>
                                                 </Menu.Item>
                                             )
                                         } else {
@@ -111,6 +116,7 @@ class Main extends Component {
                         <Layout className="margin_left200">
                             <Header 
                                 id="components-layout-demo-custom-trigger" 
+                                style={{ height: '50px', lineHeight: '50px' }}
                             >
                                 <Row>
                                     <Col span={12}>
@@ -118,7 +124,7 @@ class Main extends Component {
                                             className="trigger"
                                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                                             onClick={this.toggle}
-                                            style={{ float: 'left', marginTop: 6}}
+                                            style={{ float: 'left', marginTop: 6, visibility: 'hidden'}}
                                         />
                                         <Avatar src={sessionStorage.getItem('hospitalLogo')} />
                                         <span style={{ color: '#fff', marginLeft: 6}}>{sessionStorage.getItem('hospitalName')}</span>
@@ -126,7 +132,7 @@ class Main extends Component {
                                     <Col span={8}>
                                         <Search 
                                             placeholder='请输入病人住院号/床号进行搜索' 
-                                            style={{ float: "left", width: '100%', marginTop: 16 }} 
+                                            style={{ float: "left", width: '100%', marginTop: 9 }} 
                                             onSearch={this.props.mainSearchPaitens.bind(this)}
                                         />
                                     </Col>
