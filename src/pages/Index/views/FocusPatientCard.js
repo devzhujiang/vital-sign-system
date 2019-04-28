@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Card, Avatar, Icon } from 'antd'
+import { Card, Icon } from 'antd'
 import './index.less'
 import ModalForm from './ModalForm.js'
 import { Link } from 'react-router-dom'
 import __ from 'lodash'
+import Helmet from 'react-helmet'
 export default class FocusPatientCard extends Component {
     render() {
         const{
@@ -13,8 +14,15 @@ export default class FocusPatientCard extends Component {
             focusPaitentServices,
             openPaitentWarningPlan
         } = this.props
+        const IconFont = Icon.createFromIconfontCN({
+            scriptUrl: '//at.alicdn.com/t/font_922218_5j15b9gl989.js',
+        })
         return (
             <React.Fragment>
+                <Helmet>
+                    <link href="//at.alicdn.com/t/font_922218_5j15b9gl989.css" />
+                    <script src="//at.alicdn.com/t/font_922218_5j15b9gl989.js" />   
+                </Helmet>
                 {
                     focusPaitents.length === 0 ? (
                         <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 14, width: '100%' }}>暂无特别关注的病人</div>
@@ -38,7 +46,8 @@ export default class FocusPatientCard extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="personBeds">
-                                                            <Avatar className="isInBedIcon" src={require('../../../images/new-icon/in-bed-black.png')} />
+                                                            <IconFont type="icon-zaichuang-hei1" className="isInBedIcon"/>
+                                                            {/* <Avatar className="isInBedIcon" src={require('../../../images/new-icon/in-bed-black.png')} /> */}
                                                         </div>
                                                     </div>
                                                     <div className="cardCont">
@@ -59,7 +68,7 @@ export default class FocusPatientCard extends Component {
                                                 </Link>
                                                 <div className="cardBottom">
                                                     <Icon onClick={focusPaitentServices.bind(this, item.id)} style={{ marginRight: 10}} className="icon-set-focus"  type="heart" theme="filled" /> 
-                                                    <Icon onClick={openPaitentWarningPlan.bind(this, item.id, item.planId)} className="icon-set" type="setting" theme="outlined" /> 
+                                                    <IconFont onClick={openPaitentWarningPlan.bind(this, item.id, item.planId)} className="icon-set" type="icon-shezhi1" theme="outlined" /> 
                                                 </div>
                                             </Card>
                                             {
