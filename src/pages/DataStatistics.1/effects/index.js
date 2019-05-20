@@ -1,7 +1,6 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import requestServices from '../../../services/index'
 import { notification } from 'antd'
-import moment from 'moment'
 //分页获取提醒消息
 function * GetWarningMessageData(argus){
     yield put({
@@ -105,71 +104,8 @@ function * BatchProcessMessageServices(argus){
         })
     }
 }
-//顶部时间搜索
-function * searchDataStaticServices(argus){
-    console.log(argus)
-    const { formSearch, tabsKey } = yield select((state) => state.dataStatistics)
-    let startTime = ''
-    let endTime = ''
-    if(JSON.stringify(formSearch) === '{}'){
-        startTime = moment(new Date()).add(-1, 'days').format('YYYY-MM-DD 08:00:00')
-        endTime = moment(new Date()).format('YYYY-MM-DD 08:00:00')
-    }else{
-        if(formSearch.username.length === 0){
-            startTime = moment(new Date()).add(-1, 'days').format('YYYY-MM-DD 08:00:00')
-            endTime = moment(new Date()).format('YYYY-MM-DD 08:00:00')
-        }else{
-            startTime = moment(formSearch.username[0]).format('YYYY-MM-DD 00:00:00')
-            endTime = moment(formSearch.username[1]).format('YYYY-MM-DD 00:00:00')
-        }
-    }
-    const current = argus.payload ? argus.payload.current : 1
-    const data = yield call(requestServices.create,{
-        resource: '/api/vital/t-vital-hospitalized/findByPage',
-        json:{
-            startTime,
-            endTime,
-            deptId: sessionStorage.getItem('deptId'),
-            status: tabsKey,
-            pageSize: 2,
-            current: current,
-            sortCloumn: 'hospital_stay'
-        },
-        headers:{
-            authorization: sessionStorage.getItem('token')
-        }
-    })
-    yield put({
-        type: 'loading_data_statics',
-        payload: false
-    })
-    if(data && data.code === '0'){
-        if(tabsKey === '1'){
-            yield put({
-                type: 'setNewTableData',
-                payload: {
-                    data: data.data.page
-                }
-            })
-        }
-        if(tabsKey === '0'){
-            yield put({
-                type: 'setLeaveTableData',
-                payload: {
-                    data: data.data.page
-                }
-            })
-        }
-        
-    }else{
-        notification.error({
-            message: '系统错误'
-        })
-    }
-}
 export function* dataStatistics() {
     yield takeEvery('get_warning_message_data', GetWarningMessageData)
     yield takeEvery('get_data_statics_data', GetDataStaticsMessage)
     yield takeEvery('batch_process_message_services', BatchProcessMessageServices)
-    yield takeEvery('search_data_statics_services', searchDataStaticServices)
 }

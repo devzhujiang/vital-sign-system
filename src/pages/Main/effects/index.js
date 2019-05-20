@@ -103,7 +103,7 @@ export function* getDeptExceptInfoServices(argus) {
         if(argus.payload.reOpenMqtt){
             //拿到设备信息，建立MQTT连接
             let client = null
-            client = new window.Paho.MQTT.Client('wss.24hfocus.com', 443, '/mqtt', `mqttjs_${__.random(99999999,1000000000)}`);
+            client = new window.Paho.MQTT.Client('wss.24hfocus.com', 443, '/mqtt', `mqttjs_${__.random(1000000,1000000000)}`);
             // client = new window.Paho.MQTT.Client('106.14.150.252', 8083, '/mqtt', `mqttjs_${__.random(99999999,1000000000)}`);
             client.onConnectionLost = (responseObject) =>{
                 console.log(responseObject)
@@ -149,6 +149,7 @@ export function* getDeptExceptInfoServices(argus) {
                 userName: 'receiver',
                 password: 'recv4R&^#2',
                 useSSL: true,
+                keepAliveInterval: 10,
                 onSuccess: () =>{
                     console.log("已建立连接");
                     client.subscribe("+/sign_data");

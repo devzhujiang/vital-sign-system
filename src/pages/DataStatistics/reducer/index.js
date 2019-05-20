@@ -12,10 +12,76 @@ const initalState = {
     deptTongjiInfo:{},
     loading: false,
     selectedRowKeys: [],
-    isUsefull: true
+    isUsefull: true,
+    formSearch: {},
+    tabsKey: '1',
+    newEnterHosTable:{
+        data: [],
+        current: 1,
+        pageSize: 2,
+        total: undefined,
+        loading: true
+    },
+    leaveHosTable:{
+        data: [],
+        current: 1,
+        pageSize: 2,
+        total: undefined,
+        loading: true
+    },
+    warningTable:{
+        data: [],
+        current: 1,
+        pageSize: 10,
+        total: undefined,
+        loading: true
+    },
 }
 export const dataStatistics = (state = initalState, action) => {
     switch (action.type) {
+        case 'hideTableLoading': 
+            return{
+                ...state,
+                leaveHosTable: {
+                    ...state.leaveHosTable,
+                    data: action.payload.data.records,
+                    current: action.payload.data.current,
+                    pageSize: action.payload.data.size,
+                    total: action.payload.data.total,
+                }
+            }
+        case 'setLeaveTableData': 
+            return{
+                ...state,
+                leaveHosTable: {
+                    ...state.leaveHosTable,
+                    data: action.payload.data.records,
+                    current: action.payload.data.current,
+                    pageSize: action.payload.data.size,
+                    total: action.payload.data.total,
+                }
+            }
+        case 'setNewTableData': 
+            return{
+                ...state,
+                newEnterHosTable: {
+                    ...state.newEnterHosTable,
+                    data: action.payload.data.records,
+                    current: action.payload.data.current,
+                    pageSize: action.payload.data.size,
+                    total: action.payload.data.total,
+                }
+            }
+        case 'set_tabs_key': 
+            return{
+                ...state,
+                tabsKey: action.payload
+            }
+        case 'set_changed_values': 
+            return{
+                ...state,
+                formSearch: action.payload.data
+            }
         case 'set_btn_usefull': 
             return{
                 ...state,
