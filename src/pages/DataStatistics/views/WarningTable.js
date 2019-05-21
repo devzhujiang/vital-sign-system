@@ -5,33 +5,48 @@ import { Table } from 'antd'
 
 const columns = [{
     title: '床位',
-    dataIndex: 'sickbed.sn',
-}, {
-    title: '姓名',
-    dataIndex: 'patient.name',
-}, {
-    title: '性别',
-    dataIndex: 'patient.gender',
-    render(text) {
-        return (
-            <span>{text === 1 ? '男' : '女'} 岁</span>
+    dataIndex: 'sickInfo',
+    render(text, record, index){
+        return(
+            <span>{record.sickInfo ? record.sickInfo : '--'}</span>
         )
     }
-}, {
-    title: '年龄',
-    dataIndex: 'patient.age',
-}, {
-    title: '入院时间',
-    dataIndex: 'gmtCreated',
-}];
-class NewEnterHosTable extends Component {
-    componentDidMount(){
-        this.props.onTabsChange('1')
+},{
+    title: '姓名',
+    dataIndex: 'patient.name'
+},{
+    title: '性别',
+    dataIndex: 'patient.gender',
+    render(text, record, index){
+        return(
+            <span>{text === 1 ? '男' : '女'}</span>
+        )
     }
+},{
+    title: '年龄',
+    dataIndex: 'patient.age'
+},{
+    title: '预警时间',
+    dataIndex: 'processTime',
+    render(text, record, index){
+        return(
+            record.status === 0 ? (
+                <span>{record.gmtCreated ? record.gmtCreated : '暂无预警时间'}</span>
+            ):(
+                <span>{record.processTime ? record.processTime : '暂无处理时间'}</span>
+            )
+            
+        )
+    }
+},{
+    title: '预警类型',
+    dataIndex: 'msg'
+}]
+class WarningTable extends Component {
     render() {
         const {
             dataStatistics: {
-                newEnterHosTable: {
+                warningTable: {
                     data,
                     current,
                     pageSize,
@@ -67,5 +82,5 @@ const mapStateToProps = (state) => {
         dataStatistics: state.dataStatistics
     }
 }
-export default connect(mapStateToProps)(NewEnterHosTable)
+export default connect(mapStateToProps)(WarningTable)
 

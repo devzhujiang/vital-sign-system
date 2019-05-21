@@ -4,6 +4,7 @@ import './index.less'
 import { Tabs } from 'antd'
 import NewEnterHosTable from './NewEnterHosTable'
 import LeaveHosTable from './LeaveHosTable'
+import WarningTable from './WarningTable'
 const TabPane = Tabs.TabPane
 class TabsTable extends Component {
     render() {
@@ -21,7 +22,9 @@ class TabsTable extends Component {
                     <TabPane tab="出院人数" key="0">
                         <LeaveHosTable onTabsChange={onTabsChange} onTableChange={onTableChange} />    
                     </TabPane>
-                    <TabPane tab="预警次数" key="3">开发中</TabPane>
+                    <TabPane tab="预警次数" key="2">
+                        <WarningTable onTabsChange={onTabsChange} onTableChange={onTableChange} />  
+                    </TabPane>
                 </Tabs>
                 </div>
             </React.Fragment>

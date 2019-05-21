@@ -39,11 +39,11 @@ const initalState = {
 }
 export const dataStatistics = (state = initalState, action) => {
     switch (action.type) {
-        case 'hideTableLoading': 
+        case 'setWaringTableData': 
             return{
                 ...state,
-                leaveHosTable: {
-                    ...state.leaveHosTable,
+                warningTable: {
+                    ...state.warningTable,
                     data: action.payload.data.records,
                     current: action.payload.data.current,
                     pageSize: action.payload.data.size,

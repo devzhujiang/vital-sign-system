@@ -124,48 +124,81 @@ function * searchDataStaticServices(argus){
         }
     }
     const current = argus.payload ? argus.payload.current : 1
-    const data = yield call(requestServices.create,{
-        resource: '/api/vital/t-vital-hospitalized/findByPage',
-        json:{
-            startTime,
-            endTime,
-            deptId: sessionStorage.getItem('deptId'),
-            status: tabsKey,
-            pageSize: 2,
-            current: current,
-            sortCloumn: 'hospital_stay'
-        },
-        headers:{
-            authorization: sessionStorage.getItem('token')
-        }
-    })
-    yield put({
-        type: 'loading_data_statics',
-        payload: false
-    })
-    if(data && data.code === '0'){
-        if(tabsKey === '1'){
-            yield put({
-                type: 'setNewTableData',
-                payload: {
-                    data: data.data.page
-                }
-            })
-        }
-        if(tabsKey === '0'){
-            yield put({
-                type: 'setLeaveTableData',
-                payload: {
-                    data: data.data.page
-                }
-            })
-        }
-        
-    }else{
-        notification.error({
-            message: '系统错误'
+    if(tabsKey === '2'){
+        const data = yield call(requestServices.create,{
+            resource: '/api/vital/t-vital-warning-msg/msgs',
+            json:{
+                startTime,
+                endTime,
+                deptId: sessionStorage.getItem('deptId'),
+                pageSize: 2,
+                current: current,
+            },
+            headers:{
+                authorization: sessionStorage.getItem('token')
+            }
         })
+        yield put({
+            type: 'loading_data_statics',
+            payload: false
+        })
+        if(data && data.code === '0'){
+            yield put({
+                type: 'setWaringTableData',
+                payload: {
+                    data: data.data.page
+                }
+            })
+        }else{
+            notification.error({
+                message: '系统错误'
+            })
+        }
+    }else{
+        const data = yield call(requestServices.create,{
+            resource: '/api/vital/t-vital-hospitalized/findByPage',
+            json:{
+                startTime,
+                endTime,
+                deptId: sessionStorage.getItem('deptId'),
+                status: tabsKey,
+                pageSize: 10,
+                current: current,
+                sortCloumn: 'hospital_stay'
+            },
+            headers:{
+                authorization: sessionStorage.getItem('token')
+            }
+        })
+        yield put({
+            type: 'loading_data_statics',
+            payload: false
+        })
+        if(data && data.code === '0'){
+            if(tabsKey === '1'){
+                yield put({
+                    type: 'setNewTableData',
+                    payload: {
+                        data: data.data.page
+                    }
+                })
+            }
+            if(tabsKey === '0'){
+                yield put({
+                    type: 'setLeaveTableData',
+                    payload: {
+                        data: data.data.page
+                    }
+                })
+            }
+            
+        }else{
+            notification.error({
+                message: '系统错误'
+            })
+        }
     }
+    
 }
 export function* dataStatistics() {
     yield takeEvery('get_warning_message_data', GetWarningMessageData)
