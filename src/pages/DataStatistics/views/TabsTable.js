@@ -10,22 +10,24 @@ class TabsTable extends Component {
     render() {
         const { 
             onTabsChange,
-            onTableChange
+            onTableChange,
+            onExportData
          } = this.props
         return (
             <React.Fragment>
                 <div className="dataStatisticShowTable">
-                <Tabs defaultActiveKey="1" onChange={onTabsChange.bind(this)}>
-                    <TabPane tab="新入院" key="1">
-                        <NewEnterHosTable onTabsChange={onTabsChange} onTableChange={onTableChange} />    
-                    </TabPane>
-                    <TabPane tab="出院人数" key="0">
-                        <LeaveHosTable onTabsChange={onTabsChange} onTableChange={onTableChange} />    
-                    </TabPane>
-                    <TabPane tab="预警次数" key="2">
-                        <WarningTable onTabsChange={onTabsChange} onTableChange={onTableChange} />  
-                    </TabPane>
-                </Tabs>
+                    <Tabs defaultActiveKey="1" onChange={onTabsChange.bind(this)}>
+                        <TabPane tab="新入院" key="1">
+                            <NewEnterHosTable onTabsChange={onTabsChange} onTableChange={onTableChange} />    
+                        </TabPane>
+                        <TabPane tab="出院人数" key="0">
+                            <LeaveHosTable onTabsChange={onTabsChange} onTableChange={onTableChange} />    
+                        </TabPane>
+                        <TabPane tab="预警次数" key="2">
+                            <WarningTable onTabsChange={onTabsChange} onTableChange={onTableChange} />  
+                        </TabPane>
+                    </Tabs>
+                    <span onClick={onExportData.bind(this)} className="exportData">导出数据</span>
                 </div>
             </React.Fragment>
         )
@@ -62,7 +64,12 @@ const mapDispatchToProps = (dispatch, props) => {
                     current,
                 }
             })
-        }
+        },
+        onExportData(){
+            dispatch({
+                type: 'export_data_services'
+            })
+        },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TabsTable)

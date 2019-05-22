@@ -13,7 +13,6 @@ function * GetHospitalInfoServices(argus){
         }
     })
     if(data && data.code === '0'){
-        console.log(data)
         yield put({
             type: 'save_hospital_info_to_store',
             payload:{
@@ -187,7 +186,6 @@ function * leaveBedDataServices(argus){
                 status: false
             }
         })
-        // console.log(data)
     }
 }
 //体动

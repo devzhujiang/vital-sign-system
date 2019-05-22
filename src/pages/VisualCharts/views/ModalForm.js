@@ -37,7 +37,6 @@ const mapPropsToFields = (props) =>{
     }
 }
 const onValuesChange = (props, values) => {
-    console.log(values)
     if(Object.keys(values)[0] === 'name1_1'){
         props.visualCharts.planDetails.plan.name = values.name1_1
     }
@@ -180,7 +179,6 @@ export default Form.create({mapPropsToFields, onValuesChange}) (class ModalForm 
         })
     }
     componentDidMount(){
-        console.log(this.props.visualCharts.planDetails.items[7].status)
         if(this.props.visualCharts.planDetails.items[7].status === 1){
             this.setState({
                 isShowRadioInput: true

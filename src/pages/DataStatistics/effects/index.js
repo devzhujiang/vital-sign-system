@@ -200,9 +200,76 @@ function * searchDataStaticServices(argus){
     }
     
 }
+//导出数据
+function * exportDataServices(argus){
+    const { formSearch, tabsKey } = yield select((state) => state.dataStatistics)
+    let startTime = ''
+    let endTime = ''
+    if(JSON.stringify(formSearch) === '{}'){
+        startTime = moment(new Date()).add(-1, 'days').format('YYYY-MM-DD 08:00:00')
+        endTime = moment(new Date()).format('YYYY-MM-DD 08:00:00')
+    }else{
+        if(formSearch.username.length === 0){
+            startTime = moment(new Date()).add(-1, 'days').format('YYYY-MM-DD 08:00:00')
+            endTime = moment(new Date()).format('YYYY-MM-DD 08:00:00')
+        }else{
+            startTime = moment(formSearch.username[0]).format('YYYY-MM-DD 00:00:00')
+            endTime = moment(formSearch.username[1]).format('YYYY-MM-DD 00:00:00')
+        }
+    }
+    // const current = argus.payload ? argus.payload.current : 1
+    if(tabsKey === '2'){
+        const data = yield call(requestServices.fetch,{
+            resource: '/api/vital/t-vital-warning-msg/exportMsg',
+            params:{
+                startTime,
+                endTime,
+                deptId: sessionStorage.getItem('deptId'),
+                // pageSize: 2,
+                // current: current,
+            },
+            headers:{
+                authorization: sessionStorage.getItem('token')
+            }
+        })
+        console.log(data)
+        if(data && data.code === '0'){
+            
+        }else{
+            notification.error({
+                message: '系统错误'
+            })
+        }
+    }else{
+        const data = yield call(requestServices.fetch,{
+            resource: '/api/vital/t-vital-hospitalized/hosExport',
+            params:{
+                startTime,
+                endTime,
+                deptId: sessionStorage.getItem('deptId'),
+                status: tabsKey,
+                // pageSize: 10,
+                // current: current,
+                sortCloumn: 'hospital_stay'
+            },
+            headers:{
+                authorization: sessionStorage.getItem('token')
+            }
+        })
+        if(data && data.code === '0'){
+            console.log(data)
+        }else{
+            notification.error({
+                message: '系统错误'
+            })
+        }
+    }
+    
+}
 export function* dataStatistics() {
     yield takeEvery('get_warning_message_data', GetWarningMessageData)
     yield takeEvery('get_data_statics_data', GetDataStaticsMessage)
     yield takeEvery('batch_process_message_services', BatchProcessMessageServices)
     yield takeEvery('search_data_statics_services', searchDataStaticServices)
+    yield takeEvery('export_data_services', exportDataServices)
 }

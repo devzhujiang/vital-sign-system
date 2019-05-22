@@ -7,6 +7,7 @@ import BreathCharts from "./BreathCharts"
 import HeartCharts from "./HeartCharts"
 import BodyMoveCharts from "./BodyMoveCharts"
 import StepLineCharts from './StepLineCharts'
+import SleepCharts from './SleepCharts'
 // import ScatterSimpleCharts from './ScatterSimpleCharts'
 import qs from 'qs'
 const TabPane = Tabs.TabPane
@@ -34,10 +35,15 @@ class VisualCharts extends Component {
                         </Row>
                         <Row className="charts_content">
                             <Col style={{ paddingRight: 6 }} span={12}>
-                                <StepLineCharts { ...this.props } title={'在离床'} />
+                                <SleepCharts { ...this.props } title={'睡眠监测'} />
                             </Col>
                             <Col span={12}>
                                 <BodyMoveCharts { ...this.props } title={'体动'} />
+                            </Col>
+                        </Row>
+                        <Row className="charts_content">
+                            <Col style={{ paddingRight: 6 }} span={12}>
+                                <StepLineCharts { ...this.props } title={'在离床'} />
                             </Col>
                         </Row>
                         {/* <Row className="charts_content">
@@ -54,8 +60,8 @@ class VisualCharts extends Component {
                             </Col>
                         </Row> */}
                     </TabPane>
-                    <TabPane tab="最近三天" key="2">Content of Tab Pane 2</TabPane>
-                    <TabPane tab="按日期" key="3">Content of Tab Pane 3</TabPane>
+                    {/* <TabPane tab="最近三天" key="2">Content of Tab Pane 2</TabPane>
+                    <TabPane tab="按日期" key="3">Content of Tab Pane 3</TabPane> */}
                 </Tabs>
 
             </React.Fragment>

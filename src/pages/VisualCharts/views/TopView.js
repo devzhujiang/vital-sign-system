@@ -7,7 +7,6 @@ import ModalForm from './ModalForm'
 class TopView extends Component {
     componentDidMount(){
         const query = qs.parse(this.props.location.search,{ ignoreQueryPrefix: true })
-        console.log(query)
         this.props.getHospitalInfo(query)
     }
     render() {
@@ -19,7 +18,6 @@ class TopView extends Component {
                 hospitalInfo
             }
         } = this.props
-        console.log(hospitalInfo)
         return (
             <React.Fragment>
                 <Row className="charts_top">
