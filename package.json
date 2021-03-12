@@ -54,7 +54,7 @@
     "rc-queue-anim": "^1.6.5",
     "react": "^16.4.0",
     "react-app-rewire-less": "^2.1.1",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
     "react-loadable": "^5.4.0",
