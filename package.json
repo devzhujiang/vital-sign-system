@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.9.1",
     "less": "^3.7.1",
     "less-loader": "^4.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react-app-rewired": "^1.5.2",
     "redux-devtools-extension": "^2.13.2"
   },
